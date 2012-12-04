@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.1.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_1_0.dtd">
+
+<liferay-portlet-app>
+	<portlet>
+		<portlet-name>resourceEditor</portlet-name>		
+		<instanceable>false</instanceable>
+        <render-weight>1</render-weight>
+        <ajaxable>false</ajaxable>				
+		<header-portlet-css>/js/bootstrap/css/bootstrap.css</header-portlet-css>
+        <header-portlet-css>/js/bootstrap/css/bootstrap-responsive.css</header-portlet-css>
+        <header-portlet-css>/css/resources.css</header-portlet-css>
+        <header-portlet-css>/css/style.css</header-portlet-css>
+        <header-portlet-javascript>/js/bootstrap/js/bootstrap.js</header-portlet-javascript>
+        <header-portlet-javascript>/js/bootstrap/js/bootstrap.min.js</header-portlet-javascript>
+        <header-portlet-javascript>/js/jquery.min.js</header-portlet-javascript>
+        <header-portlet-javascript>/js/jquery.paginate.js</header-portlet-javascript>
+        <header-portlet-javascript>/js/json2.js</header-portlet-javascript>
+        <header-portlet-javascript>/js/resource-editor.js</header-portlet-javascript>			
+		<css-class-wrapper>resource-editor-hook</css-class-wrapper>
+	</portlet>
+	<role-mapper>
+		<role-name>administrator</role-name>
+		<role-link>Administrator</role-link>
+	</role-mapper>
+	<role-mapper>
+		<role-name>guest</role-name>
+		<role-link>Guest</role-link>
+	</role-mapper>
+	<role-mapper>
+		<role-name>power-user</role-name>
+		<role-link>Power User</role-link>
+	</role-mapper>
+	<role-mapper>
+		<role-name>user</role-name>
+		<role-link>User</role-link>
+	</role-mapper>
+</liferay-portlet-app>

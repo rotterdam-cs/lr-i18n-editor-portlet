@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.rcs.service.model.MessageSource" />
+	<class name="com.rcs.service.model.impl.MessageSourceImpl" table="resourceEditor_MessageSource">
+		<cache usage="read-write" />
+		<composite-id name="primaryKey" class="com.rcs.service.service.persistence.MessageSourcePK">
+			<key-property name="key" column="key_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+			<key-property name="locale" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		</composite-id>
+		<property name="value" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bundle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

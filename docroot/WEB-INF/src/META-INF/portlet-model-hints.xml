@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.rcs.service.model.MessageSource">
+		<field name="key" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="locale" type="String" />
+		<field name="value" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="bundle" type="String" />
+	</model>
+</model-hints>

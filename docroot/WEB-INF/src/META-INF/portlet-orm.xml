@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="com.rcs.service.model.impl.MessageSourceModelImpl">
+		<id-class class="com.rcs.service.service.persistence.MessageSourcePK" />
+		<attributes>
+			<id name="key">
+				<column name="KEY_" />
+			</id>
+			<id name="locale" />
+			<basic name="value" />
+			<basic name="bundle" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="com.rcs.service.model.impl.MessageSourceImpl" name="MessageSource">
+		<table name="resourceEditor_MessageSource" />
+		<attributes />
+	</entity>
+</entity-mappings>
