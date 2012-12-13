@@ -3,7 +3,7 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.rcs.service.model.MessageSource" />
-	<class name="com.rcs.service.model.impl.MessageSourceImpl" table="resourceEditor_MessageSource">
+	<class name="com.rcs.service.model.impl.MessageSourceImpl" table="editor_MessageSource">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.rcs.service.service.persistence.MessageSourcePK">
 			<key-property name="key" column="key_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
