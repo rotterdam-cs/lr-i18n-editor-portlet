@@ -345,6 +345,17 @@ public class MessageSourceLocalServiceWrapper
 		_messageSourceLocalService.clearCache();
 	}
 
+	public java.util.List<com.rcs.service.model.MessageSource> findAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _messageSourceLocalService.findAll();
+	}
+
+	public java.util.List<com.rcs.service.model.MessageSource> findByBundle(
+		java.lang.String bundle)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _messageSourceLocalService.findByBundle(bundle);
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedService}
 	 */
