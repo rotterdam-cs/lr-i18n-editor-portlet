@@ -223,6 +223,126 @@ public interface MessageSourcePersistence extends BasePersistence<MessageSource>
 			com.rcs.service.NoSuchMessageSourceException;
 
 	/**
+	* Returns all the message sources where bundle = &#63;.
+	*
+	* @param bundle the bundle
+	* @return the matching message sources
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.rcs.service.model.MessageSource> findByBundle(
+		java.lang.String bundle)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the message sources where bundle = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param bundle the bundle
+	* @param start the lower bound of the range of message sources
+	* @param end the upper bound of the range of message sources (not inclusive)
+	* @return the range of matching message sources
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.rcs.service.model.MessageSource> findByBundle(
+		java.lang.String bundle, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the message sources where bundle = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param bundle the bundle
+	* @param start the lower bound of the range of message sources
+	* @param end the upper bound of the range of message sources (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching message sources
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.rcs.service.model.MessageSource> findByBundle(
+		java.lang.String bundle, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first message source in the ordered set where bundle = &#63;.
+	*
+	* @param bundle the bundle
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching message source
+	* @throws com.rcs.service.NoSuchMessageSourceException if a matching message source could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rcs.service.model.MessageSource findByBundle_First(
+		java.lang.String bundle,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rcs.service.NoSuchMessageSourceException;
+
+	/**
+	* Returns the first message source in the ordered set where bundle = &#63;.
+	*
+	* @param bundle the bundle
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching message source, or <code>null</code> if a matching message source could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rcs.service.model.MessageSource fetchByBundle_First(
+		java.lang.String bundle,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last message source in the ordered set where bundle = &#63;.
+	*
+	* @param bundle the bundle
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching message source
+	* @throws com.rcs.service.NoSuchMessageSourceException if a matching message source could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rcs.service.model.MessageSource findByBundle_Last(
+		java.lang.String bundle,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rcs.service.NoSuchMessageSourceException;
+
+	/**
+	* Returns the last message source in the ordered set where bundle = &#63;.
+	*
+	* @param bundle the bundle
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching message source, or <code>null</code> if a matching message source could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rcs.service.model.MessageSource fetchByBundle_Last(
+		java.lang.String bundle,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the message sources before and after the current message source in the ordered set where bundle = &#63;.
+	*
+	* @param messageSourcePK the primary key of the current message source
+	* @param bundle the bundle
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next message source
+	* @throws com.rcs.service.NoSuchMessageSourceException if a message source with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rcs.service.model.MessageSource[] findByBundle_PrevAndNext(
+		com.rcs.service.service.persistence.MessageSourcePK messageSourcePK,
+		java.lang.String bundle,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rcs.service.NoSuchMessageSourceException;
+
+	/**
 	* Returns the message source where key = &#63; and locale = &#63; or throws a {@link com.rcs.service.NoSuchMessageSourceException} if it could not be found.
 	*
 	* @param key the key
@@ -314,6 +434,15 @@ public interface MessageSourcePersistence extends BasePersistence<MessageSource>
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Removes all the message sources where bundle = &#63; from the database.
+	*
+	* @param bundle the bundle
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByBundle(java.lang.String bundle)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Removes the message source where key = &#63; and locale = &#63; from the database.
 	*
 	* @param key the key
@@ -342,6 +471,16 @@ public interface MessageSourcePersistence extends BasePersistence<MessageSource>
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByKey(java.lang.String key)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of message sources where bundle = &#63;.
+	*
+	* @param bundle the bundle
+	* @return the number of matching message sources
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByBundle(java.lang.String bundle)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
