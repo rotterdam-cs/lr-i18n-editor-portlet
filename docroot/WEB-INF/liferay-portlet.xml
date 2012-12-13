@@ -3,7 +3,7 @@
 
 <liferay-portlet-app>
 	<portlet>
-		<portlet-name>resourceEditor</portlet-name>		
+		<portlet-name>i18neditor</portlet-name>		
 		<instanceable>false</instanceable>
         <render-weight>1</render-weight>
         <ajaxable>false</ajaxable>				
