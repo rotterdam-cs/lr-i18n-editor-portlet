@@ -303,4 +303,11 @@ public interface MessageSourceLocalService extends BaseLocalService,
 
 	public void clearCache()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.rcs.service.model.MessageSource> findAll()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.rcs.service.model.MessageSource> findByBundle(
+		java.lang.String bundle)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }
