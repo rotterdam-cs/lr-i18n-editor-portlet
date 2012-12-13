@@ -346,6 +346,7 @@
                     $.each(obj.source, function (sIdx, sourceItm) {
                         var option =  $('<option/>',{
                             'data-key': obj.key,
+                            'data-bundle': obj.bundle,
                             'data-value': ' ',
                             value:sourceItm,
                             text: sIdx
@@ -420,6 +421,7 @@
                     arr[arr.length] = {
                         'key':$option.attr('data-key'),
                         'value': $option.val(),
+                        'bundle': $option.attr('data-bundle'),
                         'locale': $option.text()
                     };
                 });
