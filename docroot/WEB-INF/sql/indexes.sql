@@ -1,4 +1,4 @@
-create index IX_B81773D8 on resourceEditor_MessageSource (key_);
-create index IX_33A29F26 on resourceEditor_MessageSource (key_, locale);
-create index IX_E563A8DD on resourceEditor_MessageSource (resourceKey);
-create index IX_AE0FAA59 on resourceEditor_MessageSource (resourceKey, resourceLocale);
+create index IX_EE40F8CC on editor_MessageSource (bundle);
+create index IX_57BC1CAA on editor_MessageSource (key_);
+create index IX_784255F8 on editor_MessageSource (key_, locale);
+create index IX_5DE2996E on editor_MessageSource (key_, locale, bundle);
