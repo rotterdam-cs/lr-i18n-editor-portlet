@@ -97,6 +97,26 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 			MessageSourceModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByKey",
 			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_BUNDLE = new FinderPath(MessageSourceModelImpl.ENTITY_CACHE_ENABLED,
+			MessageSourceModelImpl.FINDER_CACHE_ENABLED,
+			MessageSourceImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByBundle",
+			new String[] {
+				String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BUNDLE =
+		new FinderPath(MessageSourceModelImpl.ENTITY_CACHE_ENABLED,
+			MessageSourceModelImpl.FINDER_CACHE_ENABLED,
+			MessageSourceImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByBundle", new String[] { String.class.getName() },
+			MessageSourceModelImpl.BUNDLE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_BUNDLE = new FinderPath(MessageSourceModelImpl.ENTITY_CACHE_ENABLED,
+			MessageSourceModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByBundle",
+			new String[] { String.class.getName() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_KEYANDLOCALE = new FinderPath(MessageSourceModelImpl.ENTITY_CACHE_ENABLED,
 			MessageSourceModelImpl.FINDER_CACHE_ENABLED,
 			MessageSourceImpl.class, FINDER_CLASS_NAME_ENTITY,
@@ -353,6 +373,23 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_KEY,
 					args);
 			}
+
+			if ((messageSourceModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BUNDLE.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						messageSourceModelImpl.getOriginalBundle()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_BUNDLE, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BUNDLE,
+					args);
+
+				args = new Object[] { messageSourceModelImpl.getBundle() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_BUNDLE, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BUNDLE,
+					args);
+			}
 		}
 
 		EntityCacheUtil.putResult(MessageSourceModelImpl.ENTITY_CACHE_ENABLED,
@@ -437,7 +474,7 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 
 		if (messageSource == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + messageSourcePK);
+				//_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + messageSourcePK);
 			}
 
 			throw new NoSuchMessageSourceException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
@@ -913,6 +950,412 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 	}
 
 	/**
+	 * Returns all the message sources where bundle = &#63;.
+	 *
+	 * @param bundle the bundle
+	 * @return the matching message sources
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<MessageSource> findByBundle(String bundle)
+		throws SystemException {
+		return findByBundle(bundle, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the message sources where bundle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param bundle the bundle
+	 * @param start the lower bound of the range of message sources
+	 * @param end the upper bound of the range of message sources (not inclusive)
+	 * @return the range of matching message sources
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<MessageSource> findByBundle(String bundle, int start, int end)
+		throws SystemException {
+		return findByBundle(bundle, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the message sources where bundle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param bundle the bundle
+	 * @param start the lower bound of the range of message sources
+	 * @param end the upper bound of the range of message sources (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching message sources
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<MessageSource> findByBundle(String bundle, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BUNDLE;
+			finderArgs = new Object[] { bundle };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_BUNDLE;
+			finderArgs = new Object[] { bundle, start, end, orderByComparator };
+		}
+
+		List<MessageSource> list = (List<MessageSource>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (MessageSource messageSource : list) {
+				if (!Validator.equals(bundle, messageSource.getBundle())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_MESSAGESOURCE_WHERE);
+
+			if (bundle == null) {
+				query.append(_FINDER_COLUMN_BUNDLE_BUNDLE_1);
+			}
+			else {
+				if (bundle.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_BUNDLE_BUNDLE_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_BUNDLE_BUNDLE_2);
+				}
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MessageSourceModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bundle != null) {
+					qPos.add(bundle);
+				}
+
+				list = (List<MessageSource>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(finderPath, finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(finderPath, finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first message source in the ordered set where bundle = &#63;.
+	 *
+	 * @param bundle the bundle
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching message source
+	 * @throws com.rcs.service.NoSuchMessageSourceException if a matching message source could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public MessageSource findByBundle_First(String bundle,
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageSourceException, SystemException {
+		MessageSource messageSource = fetchByBundle_First(bundle,
+				orderByComparator);
+
+		if (messageSource != null) {
+			return messageSource;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("bundle=");
+		msg.append(bundle);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchMessageSourceException(msg.toString());
+	}
+
+	/**
+	 * Returns the first message source in the ordered set where bundle = &#63;.
+	 *
+	 * @param bundle the bundle
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching message source, or <code>null</code> if a matching message source could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public MessageSource fetchByBundle_First(String bundle,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<MessageSource> list = findByBundle(bundle, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last message source in the ordered set where bundle = &#63;.
+	 *
+	 * @param bundle the bundle
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching message source
+	 * @throws com.rcs.service.NoSuchMessageSourceException if a matching message source could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public MessageSource findByBundle_Last(String bundle,
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageSourceException, SystemException {
+		MessageSource messageSource = fetchByBundle_Last(bundle,
+				orderByComparator);
+
+		if (messageSource != null) {
+			return messageSource;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("bundle=");
+		msg.append(bundle);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchMessageSourceException(msg.toString());
+	}
+
+	/**
+	 * Returns the last message source in the ordered set where bundle = &#63;.
+	 *
+	 * @param bundle the bundle
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching message source, or <code>null</code> if a matching message source could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public MessageSource fetchByBundle_Last(String bundle,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByBundle(bundle);
+
+		List<MessageSource> list = findByBundle(bundle, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the message sources before and after the current message source in the ordered set where bundle = &#63;.
+	 *
+	 * @param messageSourcePK the primary key of the current message source
+	 * @param bundle the bundle
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next message source
+	 * @throws com.rcs.service.NoSuchMessageSourceException if a message source with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public MessageSource[] findByBundle_PrevAndNext(
+		MessageSourcePK messageSourcePK, String bundle,
+		OrderByComparator orderByComparator)
+		throws NoSuchMessageSourceException, SystemException {
+		MessageSource messageSource = findByPrimaryKey(messageSourcePK);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			MessageSource[] array = new MessageSourceImpl[3];
+
+			array[0] = getByBundle_PrevAndNext(session, messageSource, bundle,
+					orderByComparator, true);
+
+			array[1] = messageSource;
+
+			array[2] = getByBundle_PrevAndNext(session, messageSource, bundle,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected MessageSource getByBundle_PrevAndNext(Session session,
+		MessageSource messageSource, String bundle,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_MESSAGESOURCE_WHERE);
+
+		if (bundle == null) {
+			query.append(_FINDER_COLUMN_BUNDLE_BUNDLE_1);
+		}
+		else {
+			if (bundle.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_BUNDLE_BUNDLE_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_BUNDLE_BUNDLE_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		else {
+			query.append(MessageSourceModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (bundle != null) {
+			qPos.add(bundle);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(messageSource);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<MessageSource> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Returns the message source where key = &#63; and locale = &#63; or throws a {@link com.rcs.service.NoSuchMessageSourceException} if it could not be found.
 	 *
 	 * @param key the key
@@ -1216,6 +1659,18 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 	}
 
 	/**
+	 * Removes all the message sources where bundle = &#63; from the database.
+	 *
+	 * @param bundle the bundle
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByBundle(String bundle) throws SystemException {
+		for (MessageSource messageSource : findByBundle(bundle)) {
+			remove(messageSource);
+		}
+	}
+
+	/**
 	 * Removes the message source where key = &#63; and locale = &#63; from the database.
 	 *
 	 * @param key the key
@@ -1298,6 +1753,71 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_KEY, finderArgs,
 					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of message sources where bundle = &#63;.
+	 *
+	 * @param bundle the bundle
+	 * @return the number of matching message sources
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByBundle(String bundle) throws SystemException {
+		Object[] finderArgs = new Object[] { bundle };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_BUNDLE,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_MESSAGESOURCE_WHERE);
+
+			if (bundle == null) {
+				query.append(_FINDER_COLUMN_BUNDLE_BUNDLE_1);
+			}
+			else {
+				if (bundle.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_BUNDLE_BUNDLE_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_BUNDLE_BUNDLE_2);
+				}
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bundle != null) {
+					qPos.add(bundle);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_BUNDLE,
+					finderArgs, count);
 
 				closeSession(session);
 			}
@@ -1471,6 +1991,9 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 	private static final String _FINDER_COLUMN_KEY_KEY_1 = "messageSource.id.key IS NULL";
 	private static final String _FINDER_COLUMN_KEY_KEY_2 = "messageSource.id.key = ?";
 	private static final String _FINDER_COLUMN_KEY_KEY_3 = "(messageSource.id.key IS NULL OR messageSource.id.key = ?)";
+	private static final String _FINDER_COLUMN_BUNDLE_BUNDLE_1 = "messageSource.bundle IS NULL";
+	private static final String _FINDER_COLUMN_BUNDLE_BUNDLE_2 = "messageSource.bundle = ?";
+	private static final String _FINDER_COLUMN_BUNDLE_BUNDLE_3 = "(messageSource.bundle IS NULL OR messageSource.bundle = ?)";
 	private static final String _FINDER_COLUMN_KEYANDLOCALE_KEY_1 = "messageSource.id.key IS NULL AND ";
 	private static final String _FINDER_COLUMN_KEYANDLOCALE_KEY_2 = "messageSource.id.key = ? AND ";
 	private static final String _FINDER_COLUMN_KEYANDLOCALE_KEY_3 = "(messageSource.id.key IS NULL OR messageSource.id.key = ?) AND ";
