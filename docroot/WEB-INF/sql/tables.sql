@@ -1,4 +1,4 @@
-create table resourceEditor_MessageSource (
+create table editor_MessageSource (
 	key_ STRING not null,
 	locale VARCHAR(75) not null,
 	value STRING null,
