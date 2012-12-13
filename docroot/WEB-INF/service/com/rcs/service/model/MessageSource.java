@@ -17,7 +17,7 @@ package com.rcs.service.model;
 import com.liferay.portal.model.PersistedModel;
 
 /**
- * The extended model interface for the MessageSource service. Represents a row in the &quot;resourceEditor_MessageSource&quot; database table, with each column mapped to a property of this class.
+ * The extended model interface for the MessageSource service. Represents a row in the &quot;editor_MessageSource&quot; database table, with each column mapped to a property of this class.
  *
  * @author flor
  * @see MessageSourceModel
