@@ -22,7 +22,7 @@
 		</attributes>
 	</mapped-superclass>
 	<entity class="com.rcs.service.model.impl.MessageSourceImpl" name="MessageSource">
-		<table name="resourceEditor_MessageSource" />
+		<table name="editor_MessageSource" />
 		<attributes />
 	</entity>
 </entity-mappings>
