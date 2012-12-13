@@ -1,120 +1,53 @@
 package com.rcs.startup;
 
-//import com.rcs.i18n.common.cache.CacheService;
-import com.rcs.common.config.ApplicationPropsBean;
 import com.rcs.service.model.MessageSource;
-import com.rcs.service.service.persistence.MessageSourcePersistence;
-import com.rcs.common.service.LocaleService;
-//import com.rcs.i18n.common.service.ObjectFactory;
-import com.rcs.common.utils.RcsConstants;
+import com.rcs.service.service.MessageSourceLocalServiceUtil;
+import com.rcs.common.utils.Importer;
 import com.rcs.common.utils.PortalLanguageResourcesUtil;
+
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
-import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.PortletLocalService;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.util.portlet.PortletProps;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
+
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-import java.util.logging.Level;
-import javax.servlet.ServletContext;
-import org.apache.commons.lang.StringUtils;
-import org.springframework.web.portlet.util.PortletUtils;
+/**
+ * Class that imports languages on startup
+ * 
+ * @author flor
+ */
+public class LanguageStartupProcessor extends SimpleAction {
 
-public class LanguageStartupProcessor extends BaseStartupProcessor {
-
+	protected static final Logger _logger = Logger.getLogger(LanguageStartupProcessor.class);
 
     @Override
     public void run(String[] ids) throws ActionException {
-
-        _logger.info("Registering custom hot deploy listener");
-
-        //if startup import is disabled
-        //@@if (!props.isImportOnStartup()) {
-        
-        if(!"true".equals(PropsUtil.get("import.on.startup"))) {
-            return;
-        }
-
-        _logger.info("Start language importing");
-
-        try {
-            _importBundle(RcsConstants.DEFAULT_BUNDLE_NAME);
-        } catch (Exception e) {
-            _logger.error("Import language bundle failed, due " + e.getMessage(), e);
-        }
-/*
-        @@List<Portlet> portlets = PortletLocalServiceUtil.getPortlets();
-        _logger.info("portlet iteration");
-        
-        
-        for (Portlet portlet : portlets) {
-            if (StringUtils.isNotBlank(portlet.getContextPath())) {
-                String contextPath = portlet.getContextPath();                
-                String portletId = portlet.getPortletId();
-                com.liferay.portal.kernel.portlet.PortletBag portletBag = com.liferay.portal.kernel.portlet.PortletBagPool.get(portletId);
-                ServletContext servletContext = portletBag.getServletContext();
-                URL resource = null;
-                try {
-                    resource = servletContext.getResource("/WEB-INF/classes/content/Language.properties");
-                } catch (MalformedURLException ex) {
-                    java.util.logging.Logger.getLogger(LanguageStartupProcessor.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                if (resource != null) {
-
-                 Properties bundle = new Properties();
-
-            try {
-
-                InputStream inStream = resource.openStream();
-                bundle.load(inStream);
-                inStream.close();
-                for (Map.Entry<String, String> message : (new HashMap<String, String>((Map) bundle)).entrySet()) {
-                    //check if message isn't exist in the DB
-                    _logger.warn("info: " + message.getKey());
-                }
-                //return new HashMap<String, String>((Map) bundle 
-
-            } catch (IOException e) {
-                _logger.warn("Could not read file", e);
-            }
-        }
-            }
-        }*/
-        
-        _logger.info("Stop language importing");
+                    	
+        try {   
+        	if(StringUtils.equals("true", PortletProps.get("import.on.startup"))) {        		        
+	        	_logger.info("Start language importing");
+	        	
+	        	Importer.importLanguages();
+	        	
+	        	MessageSourceLocalServiceUtil.findAll();
+	        	
+	        	_logger.info("Stop language importing");
+        	}
+		} catch (SystemException e) {
+			_logger.error("Language importing exception", e);
+		} catch (Exception e) {
+			_logger.error("Language importing exception", e);			
+		}                        
     }
-
-    protected Map<String, String> getLanguageMap(Locale locale) {
-        Map<String, String> languageMap;
-
-        try {
-            Locale invariantLocale = new Locale(locale.getLanguage());
-
-            //put locale invariant to special map
-            PortalLanguageResourcesUtil.putLanguageMap(invariantLocale);
-
-            //get language map of parent locale
-            languageMap = PortalLanguageResourcesUtil.getLanguageMap(invariantLocale);
-
-            //put casual locale
-            PortalLanguageResourcesUtil.putLanguageMap(locale);
-            //get language map for casual locale and merge it with invariant locale
-            languageMap.putAll(PortalLanguageResourcesUtil.getLanguageMap(locale));
-
-            return languageMap;
-        } catch (Exception e) {
-            //come to the next in case of error
-            _logger.error("Could not put new language map", e);
-
-            return Collections.emptyMap();
-        }
-    }
-
 }
