@@ -2,8 +2,8 @@
 
 <portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0">
 	<portlet>
-		<portlet-name>resourceEditor</portlet-name>
-		<display-name>Resource Editor</display-name>
+		<portlet-name>i18neditor</portlet-name>
+		<display-name>I18N Editor</display-name>
 		<portlet-class>org.springframework.web.portlet.DispatcherPortlet</portlet-class>		
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -11,9 +11,9 @@
 		</supports>
 		<resource-bundle>content.Language</resource-bundle>
 		<portlet-info>
-			<title>Resource Editor</title>
-			<short-title>Resource Editor</short-title>
-			<keywords>Resource Editor</keywords>
+			<title>I18N Editor</title>
+			<short-title>I18N Editor</short-title>
+			<keywords>I18N Editor</keywords>
 		</portlet-info>
 		<security-role-ref>
 			<role-name>administrator</role-name>
