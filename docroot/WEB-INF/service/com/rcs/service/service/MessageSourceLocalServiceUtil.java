@@ -352,6 +352,17 @@ public class MessageSourceLocalServiceUtil {
 		getService().clearCache();
 	}
 
+	public static java.util.List<com.rcs.service.model.MessageSource> findAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().findAll();
+	}
+
+	public static java.util.List<com.rcs.service.model.MessageSource> findByBundle(
+		java.lang.String bundle)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().findByBundle(bundle);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}
