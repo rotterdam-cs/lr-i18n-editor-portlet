@@ -3,7 +3,6 @@ package com.rcs.portlet.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletRequest;
@@ -12,8 +11,6 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +19,6 @@ import org.springframework.web.portlet.ModelAndView;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
 import org.springframework.web.portlet.bind.annotation.ResourceMapping;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -31,10 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.rcs.common.expert.MessageSourceExpert;
 import com.rcs.common.utils.CustomMessage;
 import com.rcs.common.utils.RcsConstants;
-import com.rcs.service.model.MessageSource;
-import com.rcs.service.service.MessageSourceLocalService;
 import com.rcs.service.service.MessageSourceLocalServiceUtil;
-import com.rcs.service.service.persistence.MessageSourceUtil;
 
 @Controller(value="ResourceEditorController")
 @Scope("session")
@@ -45,7 +38,6 @@ public class ResourceEditorController {
 	protected static final String DEFAULT_SUCCESS_RESULT = "{\"success\":true}";
 
     protected static final String DEFAULT_ERROR_RESULT = "{\"success\":false}";   
-
     
     private MessageSourceExpert messageSourceExpert = new MessageSourceExpert();
     
@@ -54,12 +46,12 @@ public class ResourceEditorController {
             mimeResponse.setContentType("text/html");
             mimeResponse.getWriter().write(response);
         } catch (Exception e){
-        	log.error("Error while response, cause - " + e.getMessage(), e);
+        	log.warn("Error while response, cause - " + e.getMessage(), e);
         }
     }
     
 	@RenderMapping
-	public ModelAndView resolveView(PortletRequest request, PortletResponse response) throws PortalException, SystemException {		
+	public ModelAndView resolveView(PortletRequest request, PortletResponse response) throws PortalException, SystemException, Exception {						
 		HashMap<String, Object> model = new HashMap<String, Object>();
 		Locale[] availableLocales = LanguageUtil.getAvailableLocales();
 		List<String> bundles = MessageSourceLocalServiceUtil.getMessageBundles();
@@ -80,9 +72,7 @@ public class ResourceEditorController {
 
 
         boolean findAll = StringUtils.isBlank(resourceKey) && StringUtils.isBlank(resourceMessage) &&
-                (resourceBundle == null || RcsConstants.ALL_BUNDLES.equals(resourceBundle));
-        
-        log.error("results: " + MessageSourceLocalServiceUtil.getMSWJson(startIndex, startIndex + pageSize));
+                (resourceBundle == null || RcsConstants.ALL_BUNDLES.equals(resourceBundle));               
         
         if (findAll)
             writeResponse(response, MessageSourceLocalServiceUtil.getMSWJson(startIndex, startIndex + pageSize));
@@ -91,8 +81,7 @@ public class ResourceEditorController {
     }
 	
 	@ResourceMapping("uploadResources")
-    public void uploadResources(@RequestParam("data") String data, ResourceResponse response) {
-		log.error("data: " + data);
+    public void uploadResources(@RequestParam("data") String data, ResourceResponse response) {		
         List<CustomMessage> customMessages = messageSourceExpert.saveMessageSources(data, false);
         writeResponse(response, messageSourceExpert.getCMJson(customMessages));
     }
