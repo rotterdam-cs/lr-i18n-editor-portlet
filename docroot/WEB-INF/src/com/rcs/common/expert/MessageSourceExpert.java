@@ -35,10 +35,7 @@ public class MessageSourceExpert {
 	
 	public List<CustomMessage> delete(String data) {
         if (StringUtils.isNotBlank(data)) {
-        	//@@probar
-            //persistence.deleteThroughHQL(data);
-        	try {        		
-        		//MessageSourceLocalServiceUtil.getMessageSourcesByKey(data);
+        	try {        		        		
 				List<MessageSource> messageSources = MessageSourceLocalServiceUtil.getMessageSourcesByKey(data);
 				for(MessageSource messageSource : messageSources) {
 					MessageSourceLocalServiceUtil.deleteMessageSource(messageSource);
@@ -47,7 +44,6 @@ public class MessageSourceExpert {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        	//this.de
         }
         return Collections.emptyList();
     }
@@ -55,11 +51,8 @@ public class MessageSourceExpert {
 	public String getCMJson(List<CustomMessage> customMessages) {
         try {
             return new ObjectMapper().writeValueAsString(customMessages);
-        } catch (IOException e) {
-            //_logger.error("Cannot serialize CustomMessage list, cause: " + e.getMessage(), e);
-        }
-        return EMPTY_JSON;
-        //return "";
+        } catch (IOException ignored) {}
+        return EMPTY_JSON;        
     }
 	
 	private List<CustomMessage> getCustomMessageList(CustomMessage ... customMessages) {
@@ -71,34 +64,24 @@ public class MessageSourceExpert {
         return om.readValue(data, new TypeReference<List<MessageSourceImpl>>() {});
     }
 	
-	public List<CustomMessage> saveMessageSources(String data, Boolean save) {		
-		_logger.debug("error: " + save);
+	public List<CustomMessage> saveMessageSources(String data, Boolean save) {				
         try {
             List<MessageSource> messageSourceList = deserializeMessageSources(data);
 
             for (MessageSource messageSource : messageSourceList) {
-
-            	_logger.debug("messageSource: " + messageSource);
+            
                 if (save) {
-                	MessageSourceLocalServiceUtil.addMessageSource(messageSource);                	
-                    //persistence.insert(messageSource);
+                	MessageSourceLocalServiceUtil.addMessageSource(messageSource);                	                   
                 } else {
                 	MessageSourceLocalServiceUtil.updateMessageSource(messageSource);
-                    //persistence.updateThroughHQL(messageSource);
                 }
                 MessageSourceLocalServiceUtil.clearCache();
-                //@@todo: clear cache
-                //put into cache
-                /*if (props.isCacheEnabled()) {
-                    cacheService.putResult(MessageSource.class.getSimpleName(), null,
-                            new Object[]{messageSource.getKey(), messageSource.getLocale()}, messageSource);
-                }*/
             }
         } catch (SystemException e) {
-        	_logger.error("Cannot save data cause: " + e.getMessage(), e);
+        	_logger.warn("Cannot save data cause: " + e.getMessage(), e);
             return getCustomMessageList(new CustomMessage("resources not saved", true));        
         } catch (IOException e) {
-            _logger.error("Cannot save data cause: " + e.getMessage(), e);
+            _logger.warn("Cannot save data cause: " + e.getMessage(), e);
             return getCustomMessageList(new CustomMessage("resources not saved", true));
         }
         return getCustomMessageList(new CustomMessage("resources saved", false));
