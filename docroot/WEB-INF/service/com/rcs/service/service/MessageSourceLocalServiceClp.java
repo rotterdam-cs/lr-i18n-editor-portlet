@@ -183,6 +183,14 @@ public class MessageSourceLocalServiceClp implements MessageSourceLocalService {
 		_methodName30 = "clearCache";
 
 		_methodParameterTypes30 = new String[] {  };
+
+		_methodName31 = "findAll";
+
+		_methodParameterTypes31 = new String[] {  };
+
+		_methodName32 = "findByBundle";
+
+		_methodParameterTypes32 = new String[] { "java.lang.String" };
 	}
 
 	public com.rcs.service.model.MessageSource addMessageSource(
@@ -1099,6 +1107,62 @@ public class MessageSourceLocalServiceClp implements MessageSourceLocalService {
 		}
 	}
 
+	public java.util.List<com.rcs.service.model.MessageSource> findAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName31,
+					_methodParameterTypes31, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.rcs.service.model.MessageSource>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	public java.util.List<com.rcs.service.model.MessageSource> findByBundle(
+		java.lang.String bundle)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName32,
+					_methodParameterTypes32,
+					new Object[] { ClpSerializer.translateInput(bundle) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.rcs.service.model.MessageSource>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -1160,4 +1224,8 @@ public class MessageSourceLocalServiceClp implements MessageSourceLocalService {
 	private String[] _methodParameterTypes29;
 	private String _methodName30;
 	private String[] _methodParameterTypes30;
+	private String _methodName31;
+	private String[] _methodParameterTypes31;
+	private String _methodName32;
+	private String[] _methodParameterTypes32;
 }
