@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -34,9 +33,10 @@ import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleThreadLocal;
-import com.liferay.portal.service.PersistedModelLocalServiceRegistryUtil;
-import com.rcs.common.utils.Importer;
+import com.rcs.common.expert.MessageSourceExpert;
 import com.rcs.common.utils.MessageSourceWrapper;
 import com.rcs.common.utils.RcsConstants;
 import com.rcs.service.model.MessageSource;
@@ -65,9 +65,9 @@ public class MessageSourceLocalServiceImpl
 	 * Never reference this interface directly. Always use {@link com.rcs.service.service.MessageSourceLocalServiceUtil} to access the message source local service.
 	 */
 	
-	public static final String EMPTY_JSON = "[]";
+public static final String EMPTY_JSON = "[]";
 	
-	private Logger _logger = Logger.getLogger(getClass());
+	private static Log _logger = LogFactoryUtil.getLog(MessageSourceLocalServiceImpl.class);
 	
 	public List<String> getMessageBundles() throws SystemException {		
 		DynamicQuery query = DynamicQueryFactoryUtil.forClass(MessageSource.class);
@@ -167,7 +167,7 @@ public class MessageSourceLocalServiceImpl
                 messageSourceWrapper = new MessageSourceWrapper();
                 messageSourceWrapper.setKey(messageSource.getKey());
                 messageSourceWrapper.setBundle(messageSource.getBundle());
-                messageSourceWrapper.setSource(new HashMap<String, String>());
+                messageSourceWrapper.setSource(new HashMap());
                 messageSourceWrapperList.add(messageSourceWrapper);
             }
             messageSourceWrapper.getSource().put(messageSource.getLocale(), messageSource.getValue());
