@@ -1,20 +1,20 @@
 package com.rcs.common.listener;
 
-
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
-import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.util.PortalUtil;
-import com.rcs.common.utils.Importer;
 
-import org.apache.log4j.Logger;
 import javax.servlet.ServletContext;
+
+import com.rcs.common.utils.Importer;
 
 public class HotDeployListenerHook implements HotDeployListener {
 
-    private static final Logger _logger = Logger.getLogger(HotDeployListenerHook.class);
+	private static Log _logger = LogFactoryUtil.getLog(HotDeployListenerHook.class);
 
     public static final String DEFAULT_RESOURCE_NAME = "Language.properties";
 
