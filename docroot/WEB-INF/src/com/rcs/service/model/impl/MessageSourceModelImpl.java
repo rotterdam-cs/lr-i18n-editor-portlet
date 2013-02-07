@@ -30,9 +30,6 @@ import java.io.Serializable;
 
 import java.sql.Types;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * The base model implementation for the MessageSource service. Represents a row in the &quot;editor_MessageSource&quot; database table, with each column mapped to a property of this class.
  *
@@ -108,45 +105,6 @@ public class MessageSourceModelImpl extends BaseModelImpl<MessageSource>
 
 	public String getModelClassName() {
 		return MessageSource.class.getName();
-	}
-
-	@Override
-	public Map<String, Object> getModelAttributes() {
-		Map<String, Object> attributes = new HashMap<String, Object>();
-
-		attributes.put("key", getKey());
-		attributes.put("locale", getLocale());
-		attributes.put("value", getValue());
-		attributes.put("bundle", getBundle());
-
-		return attributes;
-	}
-
-	@Override
-	public void setModelAttributes(Map<String, Object> attributes) {
-		String key = (String)attributes.get("key");
-
-		if (key != null) {
-			setKey(key);
-		}
-
-		String locale = (String)attributes.get("locale");
-
-		if (locale != null) {
-			setLocale(locale);
-		}
-
-		String value = (String)attributes.get("value");
-
-		if (value != null) {
-			setValue(value);
-		}
-
-		String bundle = (String)attributes.get("bundle");
-
-		if (bundle != null) {
-			setBundle(bundle);
-		}
 	}
 
 	public String getKey() {
