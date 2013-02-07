@@ -246,6 +246,10 @@ public class MessageSourceUtil {
 	/**
 	* Returns the first message source in the ordered set where key = &#63;.
 	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
 	* @param key the key
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message source
@@ -261,22 +265,11 @@ public class MessageSourceUtil {
 	}
 
 	/**
-	* Returns the first message source in the ordered set where key = &#63;.
-	*
-	* @param key the key
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching message source, or <code>null</code> if a matching message source could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.rcs.service.model.MessageSource fetchByKey_First(
-		java.lang.String key,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByKey_First(key, orderByComparator);
-	}
-
-	/**
 	* Returns the last message source in the ordered set where key = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
 	*
 	* @param key the key
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -293,22 +286,11 @@ public class MessageSourceUtil {
 	}
 
 	/**
-	* Returns the last message source in the ordered set where key = &#63;.
-	*
-	* @param key the key
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching message source, or <code>null</code> if a matching message source could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.rcs.service.model.MessageSource fetchByKey_Last(
-		java.lang.String key,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByKey_Last(key, orderByComparator);
-	}
-
-	/**
 	* Returns the message sources before and after the current message source in the ordered set where key = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
 	*
 	* @param messageSourcePK the primary key of the current message source
 	* @param key the key
@@ -385,6 +367,10 @@ public class MessageSourceUtil {
 	/**
 	* Returns the first message source in the ordered set where bundle = &#63;.
 	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
 	* @param bundle the bundle
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message source
@@ -400,22 +386,11 @@ public class MessageSourceUtil {
 	}
 
 	/**
-	* Returns the first message source in the ordered set where bundle = &#63;.
-	*
-	* @param bundle the bundle
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching message source, or <code>null</code> if a matching message source could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.rcs.service.model.MessageSource fetchByBundle_First(
-		java.lang.String bundle,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByBundle_First(bundle, orderByComparator);
-	}
-
-	/**
 	* Returns the last message source in the ordered set where bundle = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
 	*
 	* @param bundle the bundle
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -432,22 +407,11 @@ public class MessageSourceUtil {
 	}
 
 	/**
-	* Returns the last message source in the ordered set where bundle = &#63;.
-	*
-	* @param bundle the bundle
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching message source, or <code>null</code> if a matching message source could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.rcs.service.model.MessageSource fetchByBundle_Last(
-		java.lang.String bundle,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByBundle_Last(bundle, orderByComparator);
-	}
-
-	/**
 	* Returns the message sources before and after the current message source in the ordered set where bundle = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
 	*
 	* @param messageSourcePK the primary key of the current message source
 	* @param bundle the bundle
@@ -589,14 +553,13 @@ public class MessageSourceUtil {
 	*
 	* @param key the key
 	* @param locale the locale
-	* @return the message source that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.service.model.MessageSource removeByKeyAndLocale(
-		java.lang.String key, java.lang.String locale)
+	public static void removeByKeyAndLocale(java.lang.String key,
+		java.lang.String locale)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rcs.service.NoSuchMessageSourceException {
-		return getPersistence().removeByKeyAndLocale(key, locale);
+		getPersistence().removeByKeyAndLocale(key, locale);
 	}
 
 	/**
@@ -670,10 +633,11 @@ public class MessageSourceUtil {
 		return _persistence;
 	}
 
-	/**
-	 * @deprecated
-	 */
 	public void setPersistence(MessageSourcePersistence persistence) {
+		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(MessageSourceUtil.class,
+			"_persistence");
 	}
 
 	private static MessageSourcePersistence _persistence;
