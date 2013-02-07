@@ -16,9 +16,6 @@ package com.rcs.service.model;
 
 import com.liferay.portal.model.ModelWrapper;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * <p>
  * This class is a wrapper for {@link MessageSource}.
@@ -40,43 +37,6 @@ public class MessageSourceWrapper implements MessageSource,
 
 	public String getModelClassName() {
 		return MessageSource.class.getName();
-	}
-
-	public Map<String, Object> getModelAttributes() {
-		Map<String, Object> attributes = new HashMap<String, Object>();
-
-		attributes.put("key", getKey());
-		attributes.put("locale", getLocale());
-		attributes.put("value", getValue());
-		attributes.put("bundle", getBundle());
-
-		return attributes;
-	}
-
-	public void setModelAttributes(Map<String, Object> attributes) {
-		String key = (String)attributes.get("key");
-
-		if (key != null) {
-			setKey(key);
-		}
-
-		String locale = (String)attributes.get("locale");
-
-		if (locale != null) {
-			setLocale(locale);
-		}
-
-		String value = (String)attributes.get("value");
-
-		if (value != null) {
-			setValue(value);
-		}
-
-		String bundle = (String)attributes.get("bundle");
-
-		if (bundle != null) {
-			setBundle(bundle);
-		}
 	}
 
 	/**
