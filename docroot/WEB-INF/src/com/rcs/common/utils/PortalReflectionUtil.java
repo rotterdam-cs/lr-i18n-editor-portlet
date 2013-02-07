@@ -1,13 +1,14 @@
 package com.rcs.common.utils;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import org.apache.log4j.Logger;
 
 import java.lang.reflect.Field;
 
 public final class PortalReflectionUtil {
 
-    private static final Logger _logger = Logger.getLogger(PortalReflectionUtil.class);
+	private static final Log _logger = LogFactoryUtil.getLog(PortalReflectionUtil.class);
     
     public static ClassLoader getPortalClassLoader(){
         return PortalClassLoaderUtil.getClassLoader();
