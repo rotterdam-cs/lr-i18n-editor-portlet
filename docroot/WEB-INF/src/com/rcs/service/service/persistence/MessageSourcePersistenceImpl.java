@@ -35,7 +35,6 @@ import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
@@ -130,11 +129,11 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 			new String[] { String.class.getName(), String.class.getName() });
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(MessageSourceModelImpl.ENTITY_CACHE_ENABLED,
 			MessageSourceModelImpl.FINDER_CACHE_ENABLED,
-			MessageSourceImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			MessageSourceImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"findAll", new String[0]);
 	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(MessageSourceModelImpl.ENTITY_CACHE_ENABLED,
 			MessageSourceModelImpl.FINDER_CACHE_ENABLED,
-			MessageSourceImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			MessageSourceImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
 			"findAll", new String[0]);
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(MessageSourceModelImpl.ENTITY_CACHE_ENABLED,
 			MessageSourceModelImpl.FINDER_CACHE_ENABLED, Long.class,
@@ -412,7 +411,6 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_KEYANDLOCALE,
 					args);
-
 				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_KEYANDLOCALE,
 					args);
 
@@ -474,7 +472,7 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 
 		if (messageSource == null) {
 			if (_log.isWarnEnabled()) {
-				//_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + messageSourcePK);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + messageSourcePK);
 			}
 
 			throw new NoSuchMessageSourceException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
@@ -607,16 +605,6 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 		List<MessageSource> list = (List<MessageSource>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
 
-		if ((list != null) && !list.isEmpty()) {
-			for (MessageSource messageSource : list) {
-				if (!Validator.equals(key, messageSource.getKey())) {
-					list = null;
-
-					break;
-				}
-			}
-		}
-
 		if (list == null) {
 			StringBundler query = null;
 
@@ -692,6 +680,10 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 	/**
 	 * Returns the first message source in the ordered set where key = &#63;.
 	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
 	 * @param key the key
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message source
@@ -701,45 +693,31 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 	public MessageSource findByKey_First(String key,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageSourceException, SystemException {
-		MessageSource messageSource = fetchByKey_First(key, orderByComparator);
-
-		if (messageSource != null) {
-			return messageSource;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("key=");
-		msg.append(key);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchMessageSourceException(msg.toString());
-	}
-
-	/**
-	 * Returns the first message source in the ordered set where key = &#63;.
-	 *
-	 * @param key the key
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching message source, or <code>null</code> if a matching message source could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public MessageSource fetchByKey_First(String key,
-		OrderByComparator orderByComparator) throws SystemException {
 		List<MessageSource> list = findByKey(key, 0, 1, orderByComparator);
 
-		if (!list.isEmpty()) {
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("key=");
+			msg.append(key);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchMessageSourceException(msg.toString());
+		}
+		else {
 			return list.get(0);
 		}
-
-		return null;
 	}
 
 	/**
 	 * Returns the last message source in the ordered set where key = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
 	 *
 	 * @param key the key
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -750,48 +728,34 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 	public MessageSource findByKey_Last(String key,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageSourceException, SystemException {
-		MessageSource messageSource = fetchByKey_Last(key, orderByComparator);
-
-		if (messageSource != null) {
-			return messageSource;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("key=");
-		msg.append(key);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchMessageSourceException(msg.toString());
-	}
-
-	/**
-	 * Returns the last message source in the ordered set where key = &#63;.
-	 *
-	 * @param key the key
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching message source, or <code>null</code> if a matching message source could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public MessageSource fetchByKey_Last(String key,
-		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByKey(key);
 
 		List<MessageSource> list = findByKey(key, count - 1, count,
 				orderByComparator);
 
-		if (!list.isEmpty()) {
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("key=");
+			msg.append(key);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchMessageSourceException(msg.toString());
+		}
+		else {
 			return list.get(0);
 		}
-
-		return null;
 	}
 
 	/**
 	 * Returns the message sources before and after the current message source in the ordered set where key = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
 	 *
 	 * @param messageSourcePK the primary key of the current message source
 	 * @param key the key
@@ -1011,16 +975,6 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 		List<MessageSource> list = (List<MessageSource>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
 
-		if ((list != null) && !list.isEmpty()) {
-			for (MessageSource messageSource : list) {
-				if (!Validator.equals(bundle, messageSource.getBundle())) {
-					list = null;
-
-					break;
-				}
-			}
-		}
-
 		if (list == null) {
 			StringBundler query = null;
 
@@ -1096,6 +1050,10 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 	/**
 	 * Returns the first message source in the ordered set where bundle = &#63;.
 	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
 	 * @param bundle the bundle
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message source
@@ -1105,46 +1063,31 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 	public MessageSource findByBundle_First(String bundle,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageSourceException, SystemException {
-		MessageSource messageSource = fetchByBundle_First(bundle,
-				orderByComparator);
-
-		if (messageSource != null) {
-			return messageSource;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("bundle=");
-		msg.append(bundle);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchMessageSourceException(msg.toString());
-	}
-
-	/**
-	 * Returns the first message source in the ordered set where bundle = &#63;.
-	 *
-	 * @param bundle the bundle
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching message source, or <code>null</code> if a matching message source could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public MessageSource fetchByBundle_First(String bundle,
-		OrderByComparator orderByComparator) throws SystemException {
 		List<MessageSource> list = findByBundle(bundle, 0, 1, orderByComparator);
 
-		if (!list.isEmpty()) {
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("bundle=");
+			msg.append(bundle);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchMessageSourceException(msg.toString());
+		}
+		else {
 			return list.get(0);
 		}
-
-		return null;
 	}
 
 	/**
 	 * Returns the last message source in the ordered set where bundle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
 	 *
 	 * @param bundle the bundle
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -1155,49 +1098,34 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 	public MessageSource findByBundle_Last(String bundle,
 		OrderByComparator orderByComparator)
 		throws NoSuchMessageSourceException, SystemException {
-		MessageSource messageSource = fetchByBundle_Last(bundle,
-				orderByComparator);
-
-		if (messageSource != null) {
-			return messageSource;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("bundle=");
-		msg.append(bundle);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchMessageSourceException(msg.toString());
-	}
-
-	/**
-	 * Returns the last message source in the ordered set where bundle = &#63;.
-	 *
-	 * @param bundle the bundle
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching message source, or <code>null</code> if a matching message source could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public MessageSource fetchByBundle_Last(String bundle,
-		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByBundle(bundle);
 
 		List<MessageSource> list = findByBundle(bundle, count - 1, count,
 				orderByComparator);
 
-		if (!list.isEmpty()) {
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("bundle=");
+			msg.append(bundle);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchMessageSourceException(msg.toString());
+		}
+		else {
 			return list.get(0);
 		}
-
-		return null;
 	}
 
 	/**
 	 * Returns the message sources before and after the current message source in the ordered set where bundle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
 	 *
 	 * @param messageSourcePK the primary key of the current message source
 	 * @param bundle the bundle
@@ -1424,15 +1352,6 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 					finderArgs, this);
 		}
 
-		if (result instanceof MessageSource) {
-			MessageSource messageSource = (MessageSource)result;
-
-			if (!Validator.equals(key, messageSource.getKey()) ||
-					!Validator.equals(locale, messageSource.getLocale())) {
-				result = null;
-			}
-		}
-
 		if (result == null) {
 			StringBundler query = new StringBundler(4);
 
@@ -1578,11 +1497,11 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
 			finderArgs = FINDER_ARGS_EMPTY;
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
 			finderArgs = new Object[] { start, end, orderByComparator };
 		}
 
@@ -1675,14 +1594,13 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 	 *
 	 * @param key the key
 	 * @param locale the locale
-	 * @return the message source that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public MessageSource removeByKeyAndLocale(String key, String locale)
+	public void removeByKeyAndLocale(String key, String locale)
 		throws NoSuchMessageSourceException, SystemException {
 		MessageSource messageSource = findByKeyAndLocale(key, locale);
 
-		return remove(messageSource);
+		remove(messageSource);
 	}
 
 	/**
