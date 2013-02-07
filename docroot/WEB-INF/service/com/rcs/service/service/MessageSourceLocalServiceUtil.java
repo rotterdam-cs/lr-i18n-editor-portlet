@@ -15,8 +15,9 @@
 package com.rcs.service.service;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ClassLoaderProxy;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
-import com.liferay.portal.service.InvokableLocalService;
 
 /**
  * The utility for the message source local service. This utility wraps {@link com.rcs.service.service.impl.MessageSourceLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -66,32 +67,26 @@ public class MessageSourceLocalServiceUtil {
 	* Deletes the message source with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param messageSourcePK the primary key of the message source
-	* @return the message source that was removed
 	* @throws PortalException if a message source with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.service.model.MessageSource deleteMessageSource(
+	public static void deleteMessageSource(
 		com.rcs.service.service.persistence.MessageSourcePK messageSourcePK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().deleteMessageSource(messageSourcePK);
+		getService().deleteMessageSource(messageSourcePK);
 	}
 
 	/**
 	* Deletes the message source from the database. Also notifies the appropriate model listeners.
 	*
 	* @param messageSource the message source
-	* @return the message source that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rcs.service.model.MessageSource deleteMessageSource(
+	public static void deleteMessageSource(
 		com.rcs.service.model.MessageSource messageSource)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().deleteMessageSource(messageSource);
-	}
-
-	public static com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
-		return getService().dynamicQuery();
+		getService().deleteMessageSource(messageSource);
 	}
 
 	/**
@@ -267,12 +262,6 @@ public class MessageSourceLocalServiceUtil {
 		getService().setBeanIdentifier(beanIdentifier);
 	}
 
-	public static java.lang.Object invokeMethod(java.lang.String name,
-		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
-		throws java.lang.Throwable {
-		return getService().invokeMethod(name, parameterTypes, arguments);
-	}
-
 	public static java.util.List<java.lang.String> getMessageBundles()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getMessageBundles();
@@ -369,27 +358,35 @@ public class MessageSourceLocalServiceUtil {
 
 	public static MessageSourceLocalService getService() {
 		if (_service == null) {
-			InvokableLocalService invokableLocalService = (InvokableLocalService)PortletBeanLocatorUtil.locate(ClpSerializer.getServletContextName(),
+			Object object = PortletBeanLocatorUtil.locate(ClpSerializer.getServletContextName(),
 					MessageSourceLocalService.class.getName());
+			ClassLoader portletClassLoader = (ClassLoader)PortletBeanLocatorUtil.locate(ClpSerializer.getServletContextName(),
+					"portletClassLoader");
 
-			if (invokableLocalService instanceof MessageSourceLocalService) {
-				_service = (MessageSourceLocalService)invokableLocalService;
-			}
-			else {
-				_service = new MessageSourceLocalServiceClp(invokableLocalService);
-			}
+			ClassLoaderProxy classLoaderProxy = new ClassLoaderProxy(object,
+					MessageSourceLocalService.class.getName(),
+					portletClassLoader);
+
+			_service = new MessageSourceLocalServiceClp(classLoaderProxy);
+
+			ClpSerializer.setClassLoader(portletClassLoader);
 
 			ReferenceRegistry.registerReference(MessageSourceLocalServiceUtil.class,
 				"_service");
+			MethodCache.remove(MessageSourceLocalService.class);
 		}
 
 		return _service;
 	}
 
-	/**
-	 * @deprecated
-	 */
 	public void setService(MessageSourceLocalService service) {
+		MethodCache.remove(MessageSourceLocalService.class);
+
+		_service = service;
+
+		ReferenceRegistry.registerReference(MessageSourceLocalServiceUtil.class,
+			"_service");
+		MethodCache.remove(MessageSourceLocalService.class);
 	}
 
 	private static MessageSourceLocalService _service;
