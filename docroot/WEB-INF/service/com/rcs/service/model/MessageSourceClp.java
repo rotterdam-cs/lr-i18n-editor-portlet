@@ -17,7 +17,6 @@ package com.rcs.service.model;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
 import com.rcs.service.service.MessageSourceLocalServiceUtil;
@@ -26,9 +25,6 @@ import com.rcs.service.service.persistence.MessageSourcePK;
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author flor
@@ -63,45 +59,6 @@ public class MessageSourceClp extends BaseModelImpl<MessageSource>
 		setPrimaryKey((MessageSourcePK)primaryKeyObj);
 	}
 
-	@Override
-	public Map<String, Object> getModelAttributes() {
-		Map<String, Object> attributes = new HashMap<String, Object>();
-
-		attributes.put("key", getKey());
-		attributes.put("locale", getLocale());
-		attributes.put("value", getValue());
-		attributes.put("bundle", getBundle());
-
-		return attributes;
-	}
-
-	@Override
-	public void setModelAttributes(Map<String, Object> attributes) {
-		String key = (String)attributes.get("key");
-
-		if (key != null) {
-			setKey(key);
-		}
-
-		String locale = (String)attributes.get("locale");
-
-		if (locale != null) {
-			setLocale(locale);
-		}
-
-		String value = (String)attributes.get("value");
-
-		if (value != null) {
-			setValue(value);
-		}
-
-		String bundle = (String)attributes.get("bundle");
-
-		if (bundle != null) {
-			setBundle(bundle);
-		}
-	}
-
 	public String getKey() {
 		return _key;
 	}
@@ -132,15 +89,6 @@ public class MessageSourceClp extends BaseModelImpl<MessageSource>
 
 	public void setBundle(String bundle) {
 		_bundle = bundle;
-	}
-
-	public BaseModel<?> getMessageSourceRemoteModel() {
-		return _messageSourceRemoteModel;
-	}
-
-	public void setMessageSourceRemoteModel(
-		BaseModel<?> messageSourceRemoteModel) {
-		_messageSourceRemoteModel = messageSourceRemoteModel;
 	}
 
 	public void persist() throws SystemException {
@@ -262,5 +210,4 @@ public class MessageSourceClp extends BaseModelImpl<MessageSource>
 	private String _locale;
 	private String _value;
 	private String _bundle;
-	private BaseModel<?> _messageSourceRemoteModel;
 }
