@@ -15,10 +15,11 @@ import java.util.Properties;
 import javax.servlet.ServletContext;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Document;
@@ -35,7 +36,7 @@ import com.rcs.service.service.persistence.MessageSourceUtil;
 
 public class Importer {
 	
-	public static Logger _logger = Logger.getLogger(Importer.class);
+	private static final Log _logger = LogFactoryUtil.getLog(Importer.class);
 	
 	private static ClassLoader classLoader = Thread.currentThread().getContextClassLoader();    
     
@@ -209,10 +210,14 @@ public class Importer {
 
         for (Element portletElement : rootElement.elements("portlet")) {
 
-            String resourceBundleName = portletElement.elementText("resource-bundle").replace('.', '/');
+        	String resourceBundleName = null;
+        	try {
+        		resourceBundleName = portletElement.elementText("resource-bundle").replace('.', '/');
+        	} catch(NullPointerException ignored) {
+        		resourceBundleName = null;
+        	}
 
             if (resourceBundleName != null) {
-
                 resourceBundleSpecified = true;                
                 processBundle(resourceBundleName, servletContext, bundleName);
             }
