@@ -61,32 +61,26 @@ public class MessageSourceLocalServiceWrapper
 	* Deletes the message source with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param messageSourcePK the primary key of the message source
-	* @return the message source that was removed
 	* @throws PortalException if a message source with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rcs.service.model.MessageSource deleteMessageSource(
+	public void deleteMessageSource(
 		com.rcs.service.service.persistence.MessageSourcePK messageSourcePK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _messageSourceLocalService.deleteMessageSource(messageSourcePK);
+		_messageSourceLocalService.deleteMessageSource(messageSourcePK);
 	}
 
 	/**
 	* Deletes the message source from the database. Also notifies the appropriate model listeners.
 	*
 	* @param messageSource the message source
-	* @return the message source that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rcs.service.model.MessageSource deleteMessageSource(
+	public void deleteMessageSource(
 		com.rcs.service.model.MessageSource messageSource)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _messageSourceLocalService.deleteMessageSource(messageSource);
-	}
-
-	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
-		return _messageSourceLocalService.dynamicQuery();
+		_messageSourceLocalService.deleteMessageSource(messageSource);
 	}
 
 	/**
@@ -261,13 +255,6 @@ public class MessageSourceLocalServiceWrapper
 	*/
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_messageSourceLocalService.setBeanIdentifier(beanIdentifier);
-	}
-
-	public java.lang.Object invokeMethod(java.lang.String name,
-		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
-		throws java.lang.Throwable {
-		return _messageSourceLocalService.invokeMethod(name, parameterTypes,
-			arguments);
 	}
 
 	public java.util.List<java.lang.String> getMessageBundles()
