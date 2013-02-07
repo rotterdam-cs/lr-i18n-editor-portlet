@@ -7,29 +7,22 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.springframework.stereotype.Component;
 
-import sun.util.logging.resources.logging;
-
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.rcs.common.utils.CustomMessage;
 import com.rcs.service.model.MessageSource;
 import com.rcs.service.model.impl.MessageSourceImpl;
-import com.rcs.service.model.impl.MessageSourceModelImpl;
 import com.rcs.service.service.MessageSourceLocalServiceUtil;
-import com.rcs.service.service.impl.MessageSourceLocalServiceImpl;
-import com.rcs.service.service.persistence.MessageSourceUtil;
 
 @Component
 public class MessageSourceExpert {
 	
-	private static Log _logger = LogFactoryUtil.getLog(MessageSourceExpert.class);
+	private static final Log _logger = LogFactoryUtil.getLog(MessageSourceExpert.class);
 	
 	public static final String EMPTY_JSON = "[]";
 	
