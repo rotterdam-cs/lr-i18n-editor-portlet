@@ -16,7 +16,6 @@
 			<id name="locale" />
 			<basic name="value" />
 			<basic name="bundle" />
-			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>
