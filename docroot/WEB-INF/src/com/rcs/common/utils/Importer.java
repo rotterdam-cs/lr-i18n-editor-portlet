@@ -184,7 +184,9 @@ public class Importer {
         if (hookElement != null) {
 
             String resourceBundleName = hookElement.elementText("language-properties");
-
+            if(StringUtils.contains(resourceBundleName, "_")) {
+            	resourceBundleName = StringUtils.substringBefore(resourceBundleName, "_"); 
+            }
             if (resourceBundleName != null) {
 
                 resourceBundleSpecified = true;
@@ -268,7 +270,7 @@ public class Importer {
 
         	_logger.info("Start importing locale " + locale.toString() + ", for bundle " + "\"" + bundleName + "\"" + ", #" + i);
         	
-            String resourceName = "/WEB-INF/classes/" + baseResourceName + StringPool.UNDERLINE + locale.getLanguage() + DEFAULT_RESOURCE_SUFFIX;
+            String resourceName = "/WEB-INF/classes/" + baseResourceName + StringPool.UNDERLINE + locale.getLanguage() + DEFAULT_RESOURCE_SUFFIX;            
                        
             URL resource = null;
 			try {
@@ -279,7 +281,7 @@ public class Importer {
 			}
 
             if (resource == null) {
-                resourceName = baseResourceName + StringPool.UNDERLINE + locale.toString() + DEFAULT_RESOURCE_SUFFIX;
+                resourceName = "/WEB-INF/classes/" + baseResourceName + StringPool.UNDERLINE + locale.toString() + DEFAULT_RESOURCE_SUFFIX;                
                 try {
 					resource = servletContext.getResource(resourceName);
 				} catch (MalformedURLException e) {
@@ -287,7 +289,7 @@ public class Importer {
 					e.printStackTrace();
 				}
             }
-
+            
             if (resource != null) {
 
                 Properties bundle = new Properties();
