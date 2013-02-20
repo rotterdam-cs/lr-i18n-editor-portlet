@@ -1,4 +1,4 @@
-<%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
+<%@ page import="com.liferay.portal.kernel.language.LanguageUtil" import="java.util.Locale" import="com.liferay.portal.kernel.util.LocaleUtil"%>
 <%@include file="init.jsp" %>
 
 <div class="portletBlock">
@@ -30,12 +30,12 @@
                     </div>
                 </div>
                 <div class="form-line">
-                    <div class="left">
+                    <div class="left">                    	
                         <liferay-ui:message key="resource-editor.in-bundle" />
                     </div>
                     <div class="center">
                         <select id="${namespace}bundlesSelect" style="margin-left: 5px; width:203px;height:20px;">
-                            <option value="all"><liferay-ui:message key="resource-editor.all-bundles" /></option>
+                            <option value="all"><%=LanguageUtil.get(pageContext,"resource-editor.all-bundles")%></option>
                             <c:forEach var="bundle" items="${bundles}">
                                 <option value="${bundle}">${bundle}</option>
                             </c:forEach>
