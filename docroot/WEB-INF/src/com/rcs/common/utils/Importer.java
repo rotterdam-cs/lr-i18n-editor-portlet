@@ -68,8 +68,10 @@ public class Importer {
                 }                              
                 
                 com.liferay.portal.kernel.portlet.PortletBag portletBag = com.liferay.portal.kernel.portlet.PortletBagPool.get(portletId);                               
-                ServletContext servletContext = portletBag.getServletContext();
-                importPortletLanguages(servletContext, bundleName);
+		if(portletBag != null) {
+	            ServletContext servletContext = portletBag.getServletContext();
+                    importPortletLanguages(servletContext, bundleName);
+                }
             }
         }
 	}
