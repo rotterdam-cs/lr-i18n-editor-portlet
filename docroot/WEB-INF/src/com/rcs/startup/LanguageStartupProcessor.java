@@ -1,23 +1,12 @@
 package com.rcs.startup;
 
-import com.rcs.service.model.MessageSource;
 import com.rcs.service.service.MessageSourceLocalServiceUtil;
 import com.rcs.common.utils.Importer;
-import com.rcs.common.utils.PortalLanguageResourcesUtil;
 
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.util.portlet.PortletProps;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.*;
+import com.liferay.portal.kernel.util.PropsUtil;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -35,7 +24,7 @@ public class LanguageStartupProcessor extends SimpleAction {
     public void run(String[] ids) throws ActionException {
                     	
         try {   
-        	if(StringUtils.equals("true", PortletProps.get("import.on.startup"))) {        		        
+        	if(StringUtils.equals("true", PropsUtil.get("import.on.startup"))) {        		        
 	        	_logger.info("Start language importing");
 	        	
 	        	Importer.importLanguages();
