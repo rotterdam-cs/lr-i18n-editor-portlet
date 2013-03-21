@@ -45,7 +45,8 @@
                 <div class="form-line">
                 	<div class="left"></div>
                 	<div class="center">
-                        <input type="button" id="${namespace}searchButton" value="<liferay-ui:message key='search' />" style="width:50px"/>
+                        <!--  <input type="button" id="${namespace}searchButton" value="<liferay-ui:message key='search' />" style="width:50px;"/>-->                        
+                        <button id="${namespace}searchButton" style="margin-left:5px"><liferay-ui:message key="search"/></button>
                     </div>
                 </div>
             </div>
