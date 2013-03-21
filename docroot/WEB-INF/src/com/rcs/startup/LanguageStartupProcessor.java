@@ -39,7 +39,7 @@ public class LanguageStartupProcessor extends SimpleAction {
                     	
     	_logger.error("Before Start language importing.");    	
         try {   
-        	if(StringUtils.equals("true", PropsUtil.get("import.on.startup"))) {        		        
+        	if(StringUtils.equals("true", PropsUtil.get("import.on.startup"))) {
 	        	_logger.info("Start language importing");
 	        	
 	        	Importer.importLanguages();
