@@ -1,3 +1,10 @@
+.portletBlock input {
+	padding-top: 1px !important;
+}
+.portletBlock select {
+	padding: 2px !important;
+}
+
 .filterTranslations {
     display: block;
     clear: both;
@@ -111,6 +118,7 @@
 
 .portletBlock{
     position: relative;
+    font-size: 11px !important;
 }
 
 .msw-table-container{
