@@ -297,10 +297,20 @@
                     var inputId = editor.configuration.namespace + '_resource_' + idx;
                     var firstKey = '';
 
+                    var selectMainLocale = Utils._getObjById(Utils._getRealId(editor.configuration.namespace, editor.onMessageSelect)).val();
                     $.each(obj.source, function (sIdx, sourceItm) {
-                        firstKey = sourceItm;
-                        return false;
+                    	if(selectMainLocale == sIdx) {
+                    		firstKey = sourceItm;
+                    		return false;
+                    	}                    	
                     });
+                    
+                    if(selectMainLocale == '' || selectMainLocale == null) {
+                    	$.each(obj.source, function (sIdx, sourceItm) {                        	
+                    		firstKey = sourceItm;
+                    		return false;                        	
+                        });
+                    }
 
                     var tr = $('<tr style="height:25px;" />');
                     /*var keyInput = $('<input />',{
@@ -342,18 +352,20 @@
                     var select = $('<select style="height:22px;width:70px;margin:3px;" />', {
                         name: obj.key
                     });
-
+                    
+                    console.log("selectMainLocale: " + selectMainLocale);
                     $.each(obj.source, function (sIdx, sourceItm) {
                         var option =  $('<option/>',{
                             'data-key': obj.key,
                             'data-bundle': obj.bundle,
                             'data-value': ' ',
                             value:sourceItm,
-                            text: sIdx
+                            text: sIdx,
+                            selected: (selectMainLocale == sIdx)
                         });
                         select.append(option);
-                    });
-
+                    });                                                          
+                    
                     var td3 = $('<td style="width:100px;" />');
                     td3.append(select);
                     tr.append(td3);
