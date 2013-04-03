@@ -208,16 +208,19 @@ public class Importer {
         Document document = SAXReaderUtil.read(xml, true);
 
         Element rootElement = document.getRootElement();
-
+                        		       
         for (Element portletElement : rootElement.elements("portlet")) {
 
-            String resourceBundleName = portletElement.elementText("resource-bundle").replace('.', '/');
+        	String resourceBundleString = portletElement.elementText("resource-bundle");
+        	if(StringUtils.isNotBlank(resourceBundleString)) {
+        		String resourceBundleName = portletElement.elementText("resource-bundle").replace('.', '/');
 
-            if (resourceBundleName != null) {
-
-                resourceBundleSpecified = true;                
-                processBundle(resourceBundleName, servletContext, bundleName);
-            }
+	            if (resourceBundleName != null) {
+	
+	                resourceBundleSpecified = true;                
+	                processBundle(resourceBundleName, servletContext, bundleName);
+	            }
+        	}
         }
         
         return resourceBundleSpecified;
