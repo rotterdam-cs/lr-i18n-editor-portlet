@@ -353,7 +353,6 @@
                         name: obj.key
                     });
                     
-                    console.log("selectMainLocale: " + selectMainLocale);
                     $.each(obj.source, function (sIdx, sourceItm) {
                         var option =  $('<option/>',{
                             'data-key': obj.key,
