@@ -4,5 +4,4 @@ target
 /.classpath
 /bin
 docroot/WEB-INF/classes/*
-docroot/WEB-INF/sql/*
 docroot/css/.sass-cache/*
