@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -187,13 +187,13 @@ public class MessageSourceLocalServiceClpInvoker {
 
 		_methodParameterTypes57 = new String[] {  };
 
-		_methodName59 = "findAll";
+		_methodName58 = "findAll";
 
-		_methodParameterTypes59 = new String[] {  };
+		_methodParameterTypes58 = new String[] {  };
 
-		_methodName60 = "findByBundle";
+		_methodName59 = "findByBundle";
 
-		_methodParameterTypes60 = new String[] { "java.lang.String" };
+		_methodParameterTypes59 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -293,6 +293,8 @@ public class MessageSourceLocalServiceClpInvoker {
 		if (_methodName37.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes37, parameterTypes)) {
 			MessageSourceLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+
+			return null;
 		}
 
 		if (_methodName42.equals(name) &&
@@ -380,15 +382,17 @@ public class MessageSourceLocalServiceClpInvoker {
 		if (_methodName57.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
 			MessageSourceLocalServiceUtil.clearCache();
+
+			return null;
+		}
+
+		if (_methodName58.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
+			return MessageSourceLocalServiceUtil.findAll();
 		}
 
 		if (_methodName59.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
-			return MessageSourceLocalServiceUtil.findAll();
-		}
-
-		if (_methodName60.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
 			return MessageSourceLocalServiceUtil.findByBundle((java.lang.String)arguments[0]);
 		}
 
@@ -457,8 +461,8 @@ public class MessageSourceLocalServiceClpInvoker {
 	private String[] _methodParameterTypes56;
 	private String _methodName57;
 	private String[] _methodParameterTypes57;
+	private String _methodName58;
+	private String[] _methodParameterTypes58;
 	private String _methodName59;
 	private String[] _methodParameterTypes59;
-	private String _methodName60;
-	private String[] _methodParameterTypes60;
 }

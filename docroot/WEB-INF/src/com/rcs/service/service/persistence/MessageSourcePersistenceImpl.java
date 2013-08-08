@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -226,9 +226,61 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 		}
 	}
 
+	protected void cacheUniqueFindersCache(MessageSource messageSource) {
+		if (messageSource.isNew()) {
+			Object[] args = new Object[] {
+					messageSource.getKey(),
+					
+					messageSource.getLocale()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_KEYANDLOCALE, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_KEYANDLOCALE, args,
+				messageSource);
+		}
+		else {
+			MessageSourceModelImpl messageSourceModelImpl = (MessageSourceModelImpl)messageSource;
+
+			if ((messageSourceModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_KEYANDLOCALE.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						messageSource.getKey(),
+						
+						messageSource.getLocale()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_KEYANDLOCALE,
+					args, Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_KEYANDLOCALE,
+					args, messageSource);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(MessageSource messageSource) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_KEYANDLOCALE,
-			new Object[] { messageSource.getKey(), messageSource.getLocale() });
+		MessageSourceModelImpl messageSourceModelImpl = (MessageSourceModelImpl)messageSource;
+
+		Object[] args = new Object[] {
+				messageSource.getKey(),
+				
+				messageSource.getLocale()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_KEYANDLOCALE, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_KEYANDLOCALE, args);
+
+		if ((messageSourceModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_KEYANDLOCALE.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					messageSourceModelImpl.getOriginalKey(),
+					
+					messageSourceModelImpl.getOriginalLocale()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_KEYANDLOCALE, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_KEYANDLOCALE, args);
+		}
 	}
 
 	/**
@@ -396,34 +448,8 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 			MessageSourceImpl.class, messageSource.getPrimaryKey(),
 			messageSource);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_KEYANDLOCALE,
-				new Object[] { messageSource.getKey(), messageSource.getLocale() },
-				messageSource);
-		}
-		else {
-			if ((messageSourceModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_KEYANDLOCALE.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						messageSourceModelImpl.getOriginalKey(),
-						
-						messageSourceModelImpl.getOriginalLocale()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_KEYANDLOCALE,
-					args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_KEYANDLOCALE,
-					args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_KEYANDLOCALE,
-					new Object[] {
-						messageSource.getKey(),
-						
-					messageSource.getLocale()
-					}, messageSource);
-			}
-		}
+		clearUniqueFindersCache(messageSource);
+		cacheUniqueFindersCache(messageSource);
 
 		return messageSource;
 	}
@@ -474,7 +500,7 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 
 		if (messageSource == null) {
 			if (_log.isWarnEnabled()) {
-				//_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + messageSourcePK);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + messageSourcePK);
 			}
 
 			throw new NoSuchMessageSourceException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
@@ -1960,8 +1986,10 @@ public class MessageSourcePersistenceImpl extends BasePersistenceImpl<MessageSou
 				List<ModelListener<MessageSource>> listenersList = new ArrayList<ModelListener<MessageSource>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<MessageSource>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

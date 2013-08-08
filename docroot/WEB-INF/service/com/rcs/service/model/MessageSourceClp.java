@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,16 +16,18 @@ package com.rcs.service.model;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 
+import com.rcs.service.service.ClpSerializer;
 import com.rcs.service.service.MessageSourceLocalServiceUtil;
 import com.rcs.service.service.persistence.MessageSourcePK;
 
 import java.io.Serializable;
 
-import java.lang.reflect.Proxy;
+import java.lang.reflect.Method;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -108,6 +110,19 @@ public class MessageSourceClp extends BaseModelImpl<MessageSource>
 
 	public void setKey(String key) {
 		_key = key;
+
+		if (_messageSourceRemoteModel != null) {
+			try {
+				Class<?> clazz = _messageSourceRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setKey", String.class);
+
+				method.invoke(_messageSourceRemoteModel, key);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
 	}
 
 	public String getLocale() {
@@ -116,6 +131,19 @@ public class MessageSourceClp extends BaseModelImpl<MessageSource>
 
 	public void setLocale(String locale) {
 		_locale = locale;
+
+		if (_messageSourceRemoteModel != null) {
+			try {
+				Class<?> clazz = _messageSourceRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setLocale", String.class);
+
+				method.invoke(_messageSourceRemoteModel, locale);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
 	}
 
 	public String getValue() {
@@ -124,6 +152,19 @@ public class MessageSourceClp extends BaseModelImpl<MessageSource>
 
 	public void setValue(String value) {
 		_value = value;
+
+		if (_messageSourceRemoteModel != null) {
+			try {
+				Class<?> clazz = _messageSourceRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setValue", String.class);
+
+				method.invoke(_messageSourceRemoteModel, value);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
 	}
 
 	public String getBundle() {
@@ -132,6 +173,19 @@ public class MessageSourceClp extends BaseModelImpl<MessageSource>
 
 	public void setBundle(String bundle) {
 		_bundle = bundle;
+
+		if (_messageSourceRemoteModel != null) {
+			try {
+				Class<?> clazz = _messageSourceRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setBundle", String.class);
+
+				method.invoke(_messageSourceRemoteModel, bundle);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
 	}
 
 	public BaseModel<?> getMessageSourceRemoteModel() {
@@ -141,6 +195,47 @@ public class MessageSourceClp extends BaseModelImpl<MessageSource>
 	public void setMessageSourceRemoteModel(
 		BaseModel<?> messageSourceRemoteModel) {
 		_messageSourceRemoteModel = messageSourceRemoteModel;
+	}
+
+	public Object invokeOnRemoteModel(String methodName,
+		Class<?>[] parameterTypes, Object[] parameterValues)
+		throws Exception {
+		Object[] remoteParameterValues = new Object[parameterValues.length];
+
+		for (int i = 0; i < parameterValues.length; i++) {
+			if (parameterValues[i] != null) {
+				remoteParameterValues[i] = ClpSerializer.translateInput(parameterValues[i]);
+			}
+		}
+
+		Class<?> remoteModelClass = _messageSourceRemoteModel.getClass();
+
+		ClassLoader remoteModelClassLoader = remoteModelClass.getClassLoader();
+
+		Class<?>[] remoteParameterTypes = new Class[parameterTypes.length];
+
+		for (int i = 0; i < parameterTypes.length; i++) {
+			if (parameterTypes[i].isPrimitive()) {
+				remoteParameterTypes[i] = parameterTypes[i];
+			}
+			else {
+				String parameterTypeName = parameterTypes[i].getName();
+
+				remoteParameterTypes[i] = remoteModelClassLoader.loadClass(parameterTypeName);
+			}
+		}
+
+		Method method = remoteModelClass.getMethod(methodName,
+				remoteParameterTypes);
+
+		Object returnValue = method.invoke(_messageSourceRemoteModel,
+				remoteParameterValues);
+
+		if (returnValue != null) {
+			returnValue = ClpSerializer.translateOutput(returnValue);
+		}
+
+		return returnValue;
 	}
 
 	public void persist() throws SystemException {
@@ -154,8 +249,12 @@ public class MessageSourceClp extends BaseModelImpl<MessageSource>
 
 	@Override
 	public MessageSource toEscapedModel() {
-		return (MessageSource)Proxy.newProxyInstance(MessageSource.class.getClassLoader(),
+		return (MessageSource)ProxyUtil.newProxyInstance(MessageSource.class.getClassLoader(),
 			new Class[] { MessageSource.class }, new AutoEscapeBeanHandler(this));
+	}
+
+	public MessageSource toUnescapedModel() {
+		return this;
 	}
 
 	@Override
@@ -184,18 +283,15 @@ public class MessageSourceClp extends BaseModelImpl<MessageSource>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MessageSourceClp)) {
 			return false;
 		}
 
-		MessageSourceClp messageSource = null;
-
-		try {
-			messageSource = (MessageSourceClp)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		MessageSourceClp messageSource = (MessageSourceClp)obj;
 
 		MessageSourcePK primaryKey = messageSource.getPrimaryKey();
 

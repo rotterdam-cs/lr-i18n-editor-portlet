@@ -3,11 +3,13 @@
 <model-hints>
 	<model name="com.rcs.service.model.MessageSource">
 		<field name="key" type="String">
-			<hint-collection name="TEXTAREA" />
+			<hint name="max-length">255</hint>
 		</field>
-		<field name="locale" type="String" />
+		<field name="locale" type="String">
+			<hint name="max-length">20</hint>
+		</field>
 		<field name="value" type="String">
-			<hint-collection name="TEXTAREA" />
+			<hint-collection name="CLOB" />
 		</field>
 		<field name="bundle" type="String" />
 	</model>

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -57,10 +57,10 @@ public class MessageSourceModelImpl extends BaseModelImpl<MessageSource>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "key_", Types.VARCHAR },
 			{ "locale", Types.VARCHAR },
-			{ "value", Types.VARCHAR },
+			{ "value", Types.CLOB },
 			{ "bundle", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table editor_MessageSource (key_ STRING not null,locale VARCHAR(75) not null,value STRING null,bundle VARCHAR(75) null,primary key (key_, locale))";
+	public static final String TABLE_SQL_CREATE = "create table editor_MessageSource (key_ VARCHAR(255) not null,locale VARCHAR(20) not null,value TEXT null,bundle VARCHAR(75) null,primary key (key_, locale))";
 	public static final String TABLE_SQL_DROP = "drop table editor_MessageSource";
 	public static final String ORDER_BY_JPQL = " ORDER BY messageSource.id.key ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY editor_MessageSource.key_ ASC";
@@ -237,13 +237,16 @@ public class MessageSourceModelImpl extends BaseModelImpl<MessageSource>
 
 	@Override
 	public MessageSource toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (MessageSource)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (MessageSource)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public MessageSource toUnescapedModel() {
+		return (MessageSource)this;
 	}
 
 	@Override
@@ -274,18 +277,15 @@ public class MessageSourceModelImpl extends BaseModelImpl<MessageSource>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MessageSource)) {
 			return false;
 		}
 
-		MessageSource messageSource = null;
-
-		try {
-			messageSource = (MessageSource)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		MessageSource messageSource = (MessageSource)obj;
 
 		MessageSourcePK primaryKey = messageSource.getPrimaryKey();
 
@@ -401,7 +401,7 @@ public class MessageSourceModelImpl extends BaseModelImpl<MessageSource>
 	}
 
 	private static ClassLoader _classLoader = MessageSource.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			MessageSource.class
 		};
 	private String _key;
@@ -412,5 +412,5 @@ public class MessageSourceModelImpl extends BaseModelImpl<MessageSource>
 	private String _bundle;
 	private String _originalBundle;
 	private long _columnBitmask;
-	private MessageSource _escapedModelProxy;
+	private MessageSource _escapedModel;
 }
