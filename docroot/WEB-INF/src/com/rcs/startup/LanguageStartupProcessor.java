@@ -6,10 +6,11 @@ import com.rcs.common.utils.Importer;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 
 /**
  * Class that imports languages on startup
@@ -18,7 +19,7 @@ import org.apache.log4j.Logger;
  */
 public class LanguageStartupProcessor extends SimpleAction {
 
-	protected static final Logger _logger = Logger.getLogger(LanguageStartupProcessor.class);
+	private static Log _logger = LogFactoryUtil.getLog(LanguageStartupProcessor.class);
 
     @Override
     public void run(String[] ids) throws ActionException {

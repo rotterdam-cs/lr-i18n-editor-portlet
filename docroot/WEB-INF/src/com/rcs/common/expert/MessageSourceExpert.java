@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.springframework.stereotype.Component;
@@ -19,6 +18,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.rcs.common.utils.CustomMessage;
+import com.rcs.common.utils.PortalLanguageResourcesUtil;
 import com.rcs.service.model.MessageSource;
 import com.rcs.service.model.impl.MessageSourceImpl;
 import com.rcs.service.model.impl.MessageSourceModelImpl;

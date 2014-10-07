@@ -1,15 +1,16 @@
 package com.rcs.common.utils;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PortalClassInvoker;
-import org.apache.log4j.Logger;
 
 import java.util.Collections;
 import java.util.Locale;
 import java.util.Map;
 
 public final class PortalLanguageResourcesUtil {
-
-    private static final Logger _logger = Logger.getLogger(PortalLanguageResourcesUtil.class);
+    
+    private static Log _logger = LogFactoryUtil.getLog(PortalLanguageResourcesUtil.class);
     
     private static final String LANGUAGE_RESOURCES_CLASS_NAME =
             "com.liferay.portal.language.LanguageResources";
