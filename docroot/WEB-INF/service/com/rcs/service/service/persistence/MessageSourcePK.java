@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -51,6 +51,7 @@ public class MessageSourcePK implements Comparable<MessageSourcePK>,
 		this.locale = locale;
 	}
 
+	@Override
 	public int compareTo(MessageSourcePK pk) {
 		if (pk == null) {
 			return -1;
@@ -75,18 +76,15 @@ public class MessageSourcePK implements Comparable<MessageSourcePK>,
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MessageSourcePK)) {
 			return false;
 		}
 
-		MessageSourcePK pk = null;
-
-		try {
-			pk = (MessageSourcePK)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		MessageSourcePK pk = (MessageSourcePK)obj;
 
 		if ((key.equals(pk.key)) && (locale.equals(pk.locale))) {
 			return true;

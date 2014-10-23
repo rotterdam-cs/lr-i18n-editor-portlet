@@ -2,7 +2,10 @@ package com.rcs.common.utils;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.PortalClassInvoker;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.support.tomcat.loader.PortalClassLoader;
 
 import java.util.Collections;
 import java.util.Locale;
@@ -18,9 +21,9 @@ public final class PortalLanguageResourcesUtil {
             "_languageMaps";
     
     public static void putLanguageMap(Locale locale) throws Exception{
-        PortalClassInvoker.invoke(false, LANGUAGE_RESOURCES_CLASS_NAME,
-                "putLanguageMap",
-                new String[]{Locale.class.getName(), Map.class.getName()},
+    	Class clazz=PortalReflectionUtil.getPortalClass(LANGUAGE_RESOURCES_CLASS_NAME);
+    	MethodKey methodKey=new MethodKey(clazz, "putLanguageMap", Locale.class, Map.class);
+        PortalClassInvoker.invoke(false, methodKey,
                 locale, Collections.emptyMap());
     }
 

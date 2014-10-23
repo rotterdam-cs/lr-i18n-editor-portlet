@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -85,27 +85,33 @@ public class MessageSourceModelImpl extends BaseModelImpl<MessageSource>
 	public MessageSourceModelImpl() {
 	}
 
+	@Override
 	public MessageSourcePK getPrimaryKey() {
 		return new MessageSourcePK(_key, _locale);
 	}
 
+	@Override
 	public void setPrimaryKey(MessageSourcePK primaryKey) {
 		setKey(primaryKey.key);
 		setLocale(primaryKey.locale);
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return new MessageSourcePK(_key, _locale);
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey((MessageSourcePK)primaryKeyObj);
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return MessageSource.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return MessageSource.class.getName();
 	}
@@ -149,6 +155,7 @@ public class MessageSourceModelImpl extends BaseModelImpl<MessageSource>
 		}
 	}
 
+	@Override
 	public String getKey() {
 		if (_key == null) {
 			return StringPool.BLANK;
@@ -158,6 +165,7 @@ public class MessageSourceModelImpl extends BaseModelImpl<MessageSource>
 		}
 	}
 
+	@Override
 	public void setKey(String key) {
 		_columnBitmask = -1L;
 
@@ -172,6 +180,7 @@ public class MessageSourceModelImpl extends BaseModelImpl<MessageSource>
 		return GetterUtil.getString(_originalKey);
 	}
 
+	@Override
 	public String getLocale() {
 		if (_locale == null) {
 			return StringPool.BLANK;
@@ -181,6 +190,7 @@ public class MessageSourceModelImpl extends BaseModelImpl<MessageSource>
 		}
 	}
 
+	@Override
 	public void setLocale(String locale) {
 		_columnBitmask |= LOCALE_COLUMN_BITMASK;
 
@@ -195,6 +205,7 @@ public class MessageSourceModelImpl extends BaseModelImpl<MessageSource>
 		return GetterUtil.getString(_originalLocale);
 	}
 
+	@Override
 	public String getValue() {
 		if (_value == null) {
 			return StringPool.BLANK;
@@ -204,10 +215,12 @@ public class MessageSourceModelImpl extends BaseModelImpl<MessageSource>
 		}
 	}
 
+	@Override
 	public void setValue(String value) {
 		_value = value;
 	}
 
+	@Override
 	public String getBundle() {
 		if (_bundle == null) {
 			return StringPool.BLANK;
@@ -217,6 +230,7 @@ public class MessageSourceModelImpl extends BaseModelImpl<MessageSource>
 		}
 	}
 
+	@Override
 	public void setBundle(String bundle) {
 		_columnBitmask |= BUNDLE_COLUMN_BITMASK;
 
@@ -237,13 +251,12 @@ public class MessageSourceModelImpl extends BaseModelImpl<MessageSource>
 
 	@Override
 	public MessageSource toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (MessageSource)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (MessageSource)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
 	}
 
 	@Override
@@ -260,6 +273,7 @@ public class MessageSourceModelImpl extends BaseModelImpl<MessageSource>
 		return messageSourceImpl;
 	}
 
+	@Override
 	public int compareTo(MessageSource messageSource) {
 		int value = 0;
 
@@ -274,18 +288,15 @@ public class MessageSourceModelImpl extends BaseModelImpl<MessageSource>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MessageSource)) {
 			return false;
 		}
 
-		MessageSource messageSource = null;
-
-		try {
-			messageSource = (MessageSource)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		MessageSource messageSource = (MessageSource)obj;
 
 		MessageSourcePK primaryKey = messageSource.getPrimaryKey();
 
@@ -371,6 +382,7 @@ public class MessageSourceModelImpl extends BaseModelImpl<MessageSource>
 		return sb.toString();
 	}
 
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(16);
 
@@ -401,7 +413,7 @@ public class MessageSourceModelImpl extends BaseModelImpl<MessageSource>
 	}
 
 	private static ClassLoader _classLoader = MessageSource.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			MessageSource.class
 		};
 	private String _key;
@@ -412,5 +424,5 @@ public class MessageSourceModelImpl extends BaseModelImpl<MessageSource>
 	private String _bundle;
 	private String _originalBundle;
 	private long _columnBitmask;
-	private MessageSource _escapedModelProxy;
+	private MessageSource _escapedModel;
 }

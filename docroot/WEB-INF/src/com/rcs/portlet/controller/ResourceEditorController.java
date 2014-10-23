@@ -57,7 +57,7 @@ public class ResourceEditorController {
 		List<String> bundles = MessageSourceLocalServiceUtil.getMessageBundles();
 		model.put("locales", availableLocales);
 		model.put("bundles", bundles);		
-		return new ModelAndView("/WEB-INF/views/portal/i18n/view/view.jsp", model);
+		return new ModelAndView("portal/i18n/view/view", model);
 	}
 	
 	

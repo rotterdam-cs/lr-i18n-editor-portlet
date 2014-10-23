@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -38,71 +38,6 @@ public interface MessageSourcePersistence extends BasePersistence<MessageSource>
 	 */
 
 	/**
-	* Caches the message source in the entity cache if it is enabled.
-	*
-	* @param messageSource the message source
-	*/
-	public void cacheResult(com.rcs.service.model.MessageSource messageSource);
-
-	/**
-	* Caches the message sources in the entity cache if it is enabled.
-	*
-	* @param messageSources the message sources
-	*/
-	public void cacheResult(
-		java.util.List<com.rcs.service.model.MessageSource> messageSources);
-
-	/**
-	* Creates a new message source with the primary key. Does not add the message source to the database.
-	*
-	* @param messageSourcePK the primary key for the new message source
-	* @return the new message source
-	*/
-	public com.rcs.service.model.MessageSource create(
-		com.rcs.service.service.persistence.MessageSourcePK messageSourcePK);
-
-	/**
-	* Removes the message source with the primary key from the database. Also notifies the appropriate model listeners.
-	*
-	* @param messageSourcePK the primary key of the message source
-	* @return the message source that was removed
-	* @throws com.rcs.service.NoSuchMessageSourceException if a message source with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.rcs.service.model.MessageSource remove(
-		com.rcs.service.service.persistence.MessageSourcePK messageSourcePK)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.rcs.service.NoSuchMessageSourceException;
-
-	public com.rcs.service.model.MessageSource updateImpl(
-		com.rcs.service.model.MessageSource messageSource, boolean merge)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the message source with the primary key or throws a {@link com.rcs.service.NoSuchMessageSourceException} if it could not be found.
-	*
-	* @param messageSourcePK the primary key of the message source
-	* @return the message source
-	* @throws com.rcs.service.NoSuchMessageSourceException if a message source with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.rcs.service.model.MessageSource findByPrimaryKey(
-		com.rcs.service.service.persistence.MessageSourcePK messageSourcePK)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.rcs.service.NoSuchMessageSourceException;
-
-	/**
-	* Returns the message source with the primary key or returns <code>null</code> if it could not be found.
-	*
-	* @param messageSourcePK the primary key of the message source
-	* @return the message source, or <code>null</code> if a message source with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.rcs.service.model.MessageSource fetchByPrimaryKey(
-		com.rcs.service.service.persistence.MessageSourcePK messageSourcePK)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Returns all the message sources where key = &#63;.
 	*
 	* @param key the key
@@ -117,7 +52,7 @@ public interface MessageSourcePersistence extends BasePersistence<MessageSource>
 	* Returns a range of all the message sources where key = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.service.model.impl.MessageSourceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param key the key
@@ -134,7 +69,7 @@ public interface MessageSourcePersistence extends BasePersistence<MessageSource>
 	* Returns an ordered range of all the message sources where key = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.service.model.impl.MessageSourceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param key the key
@@ -223,6 +158,25 @@ public interface MessageSourcePersistence extends BasePersistence<MessageSource>
 			com.rcs.service.NoSuchMessageSourceException;
 
 	/**
+	* Removes all the message sources where key = &#63; from the database.
+	*
+	* @param key the key
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByKey(java.lang.String key)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of message sources where key = &#63;.
+	*
+	* @param key the key
+	* @return the number of matching message sources
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByKey(java.lang.String key)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns all the message sources where bundle = &#63;.
 	*
 	* @param bundle the bundle
@@ -237,7 +191,7 @@ public interface MessageSourcePersistence extends BasePersistence<MessageSource>
 	* Returns a range of all the message sources where bundle = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.service.model.impl.MessageSourceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param bundle the bundle
@@ -254,7 +208,7 @@ public interface MessageSourcePersistence extends BasePersistence<MessageSource>
 	* Returns an ordered range of all the message sources where bundle = &#63;.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.service.model.impl.MessageSourceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param bundle the bundle
@@ -343,6 +297,25 @@ public interface MessageSourcePersistence extends BasePersistence<MessageSource>
 			com.rcs.service.NoSuchMessageSourceException;
 
 	/**
+	* Removes all the message sources where bundle = &#63; from the database.
+	*
+	* @param bundle the bundle
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByBundle(java.lang.String bundle)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of message sources where bundle = &#63;.
+	*
+	* @param bundle the bundle
+	* @return the number of matching message sources
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByBundle(java.lang.String bundle)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns the message source where key = &#63; and locale = &#63; or throws a {@link com.rcs.service.NoSuchMessageSourceException} if it could not be found.
 	*
 	* @param key the key
@@ -382,6 +355,95 @@ public interface MessageSourcePersistence extends BasePersistence<MessageSource>
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Removes the message source where key = &#63; and locale = &#63; from the database.
+	*
+	* @param key the key
+	* @param locale the locale
+	* @return the message source that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rcs.service.model.MessageSource removeByKeyAndLocale(
+		java.lang.String key, java.lang.String locale)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rcs.service.NoSuchMessageSourceException;
+
+	/**
+	* Returns the number of message sources where key = &#63; and locale = &#63;.
+	*
+	* @param key the key
+	* @param locale the locale
+	* @return the number of matching message sources
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByKeyAndLocale(java.lang.String key, java.lang.String locale)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Caches the message source in the entity cache if it is enabled.
+	*
+	* @param messageSource the message source
+	*/
+	public void cacheResult(com.rcs.service.model.MessageSource messageSource);
+
+	/**
+	* Caches the message sources in the entity cache if it is enabled.
+	*
+	* @param messageSources the message sources
+	*/
+	public void cacheResult(
+		java.util.List<com.rcs.service.model.MessageSource> messageSources);
+
+	/**
+	* Creates a new message source with the primary key. Does not add the message source to the database.
+	*
+	* @param messageSourcePK the primary key for the new message source
+	* @return the new message source
+	*/
+	public com.rcs.service.model.MessageSource create(
+		com.rcs.service.service.persistence.MessageSourcePK messageSourcePK);
+
+	/**
+	* Removes the message source with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param messageSourcePK the primary key of the message source
+	* @return the message source that was removed
+	* @throws com.rcs.service.NoSuchMessageSourceException if a message source with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rcs.service.model.MessageSource remove(
+		com.rcs.service.service.persistence.MessageSourcePK messageSourcePK)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rcs.service.NoSuchMessageSourceException;
+
+	public com.rcs.service.model.MessageSource updateImpl(
+		com.rcs.service.model.MessageSource messageSource)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the message source with the primary key or throws a {@link com.rcs.service.NoSuchMessageSourceException} if it could not be found.
+	*
+	* @param messageSourcePK the primary key of the message source
+	* @return the message source
+	* @throws com.rcs.service.NoSuchMessageSourceException if a message source with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rcs.service.model.MessageSource findByPrimaryKey(
+		com.rcs.service.service.persistence.MessageSourcePK messageSourcePK)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rcs.service.NoSuchMessageSourceException;
+
+	/**
+	* Returns the message source with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param messageSourcePK the primary key of the message source
+	* @return the message source, or <code>null</code> if a message source with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rcs.service.model.MessageSource fetchByPrimaryKey(
+		com.rcs.service.service.persistence.MessageSourcePK messageSourcePK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns all the message sources.
 	*
 	* @return the message sources
@@ -394,7 +456,7 @@ public interface MessageSourcePersistence extends BasePersistence<MessageSource>
 	* Returns a range of all the message sources.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.service.model.impl.MessageSourceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of message sources
@@ -410,7 +472,7 @@ public interface MessageSourcePersistence extends BasePersistence<MessageSource>
 	* Returns an ordered range of all the message sources.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rcs.service.model.impl.MessageSourceModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of message sources
@@ -425,73 +487,11 @@ public interface MessageSourcePersistence extends BasePersistence<MessageSource>
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Removes all the message sources where key = &#63; from the database.
-	*
-	* @param key the key
-	* @throws SystemException if a system exception occurred
-	*/
-	public void removeByKey(java.lang.String key)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Removes all the message sources where bundle = &#63; from the database.
-	*
-	* @param bundle the bundle
-	* @throws SystemException if a system exception occurred
-	*/
-	public void removeByBundle(java.lang.String bundle)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Removes the message source where key = &#63; and locale = &#63; from the database.
-	*
-	* @param key the key
-	* @param locale the locale
-	* @return the message source that was removed
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.rcs.service.model.MessageSource removeByKeyAndLocale(
-		java.lang.String key, java.lang.String locale)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.rcs.service.NoSuchMessageSourceException;
-
-	/**
 	* Removes all the message sources from the database.
 	*
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeAll()
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of message sources where key = &#63;.
-	*
-	* @param key the key
-	* @return the number of matching message sources
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByKey(java.lang.String key)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of message sources where bundle = &#63;.
-	*
-	* @param bundle the bundle
-	* @return the number of matching message sources
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByBundle(java.lang.String bundle)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of message sources where key = &#63; and locale = &#63;.
-	*
-	* @param key the key
-	* @param locale the locale
-	* @return the number of matching message sources
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByKeyAndLocale(java.lang.String key, java.lang.String locale)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

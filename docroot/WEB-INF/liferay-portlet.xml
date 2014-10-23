@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.1.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_1_0.dtd">
+<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.2.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_2_0.dtd">
 
 <liferay-portlet-app>
 	<portlet>
@@ -7,6 +7,7 @@
 		<control-panel-entry-category>content</control-panel-entry-category>            
         <control-panel-entry-weight>1</control-panel-entry-weight>		
 		<instanceable>false</instanceable>
+		<requires-namespaced-parameters>false</requires-namespaced-parameters>
         <render-weight>1</render-weight>
         <ajaxable>false</ajaxable>				        
 		<header-portlet-css>/js/bootstrap/css/bootstrap.css</header-portlet-css>

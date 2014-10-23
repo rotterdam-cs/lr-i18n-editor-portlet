@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -20,7 +20,10 @@ import com.liferay.portal.model.CacheModel;
 
 import com.rcs.service.model.MessageSource;
 
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 /**
  * The cache model class for representing MessageSource in entity cache.
@@ -30,7 +33,7 @@ import java.io.Serializable;
  * @generated
  */
 public class MessageSourceCacheModel implements CacheModel<MessageSource>,
-	Serializable {
+	Externalizable {
 	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
@@ -48,6 +51,7 @@ public class MessageSourceCacheModel implements CacheModel<MessageSource>,
 		return sb.toString();
 	}
 
+	@Override
 	public MessageSource toEntityModel() {
 		MessageSourceImpl messageSourceImpl = new MessageSourceImpl();
 
@@ -82,6 +86,46 @@ public class MessageSourceCacheModel implements CacheModel<MessageSource>,
 		messageSourceImpl.resetOriginalValues();
 
 		return messageSourceImpl;
+	}
+
+	@Override
+	public void readExternal(ObjectInput objectInput) throws IOException {
+		key = objectInput.readUTF();
+		locale = objectInput.readUTF();
+		value = objectInput.readUTF();
+		bundle = objectInput.readUTF();
+	}
+
+	@Override
+	public void writeExternal(ObjectOutput objectOutput)
+		throws IOException {
+		if (key == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(key);
+		}
+
+		if (locale == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(locale);
+		}
+
+		if (value == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(value);
+		}
+
+		if (bundle == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(bundle);
+		}
 	}
 
 	public String key;

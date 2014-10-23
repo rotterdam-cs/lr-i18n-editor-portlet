@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,7 +19,8 @@ import com.rcs.service.service.MessageSourceLocalServiceUtil;
 import java.util.Arrays;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author flor
+ * @generated
  */
 public class MessageSourceLocalServiceClpInvoker {
 	public MessageSourceLocalServiceClpInvoker() {
@@ -76,124 +77,125 @@ public class MessageSourceLocalServiceClpInvoker {
 				"com.liferay.portal.kernel.dao.orm.DynamicQuery"
 			};
 
-		_methodName9 = "fetchMessageSource";
+		_methodName9 = "dynamicQueryCount";
 
 		_methodParameterTypes9 = new String[] {
-				"com.rcs.service.service.persistence.MessageSourcePK"
+				"com.liferay.portal.kernel.dao.orm.DynamicQuery",
+				"com.liferay.portal.kernel.dao.orm.Projection"
 			};
 
-		_methodName10 = "getMessageSource";
+		_methodName10 = "fetchMessageSource";
 
 		_methodParameterTypes10 = new String[] {
 				"com.rcs.service.service.persistence.MessageSourcePK"
 			};
 
-		_methodName11 = "getPersistedModel";
+		_methodName11 = "getMessageSource";
 
-		_methodParameterTypes11 = new String[] { "java.io.Serializable" };
-
-		_methodName12 = "getMessageSources";
-
-		_methodParameterTypes12 = new String[] { "int", "int" };
-
-		_methodName13 = "getMessageSourcesCount";
-
-		_methodParameterTypes13 = new String[] {  };
-
-		_methodName14 = "updateMessageSource";
-
-		_methodParameterTypes14 = new String[] {
-				"com.rcs.service.model.MessageSource"
+		_methodParameterTypes11 = new String[] {
+				"com.rcs.service.service.persistence.MessageSourcePK"
 			};
+
+		_methodName12 = "getPersistedModel";
+
+		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
+
+		_methodName13 = "getMessageSources";
+
+		_methodParameterTypes13 = new String[] { "int", "int" };
+
+		_methodName14 = "getMessageSourcesCount";
+
+		_methodParameterTypes14 = new String[] {  };
 
 		_methodName15 = "updateMessageSource";
 
 		_methodParameterTypes15 = new String[] {
-				"com.rcs.service.model.MessageSource", "boolean"
+				"com.rcs.service.model.MessageSource"
 			};
 
-		_methodName36 = "getBeanIdentifier";
+		_methodName32 = "getBeanIdentifier";
 
-		_methodParameterTypes36 = new String[] {  };
+		_methodParameterTypes32 = new String[] {  };
 
-		_methodName37 = "setBeanIdentifier";
+		_methodName33 = "setBeanIdentifier";
 
-		_methodParameterTypes37 = new String[] { "java.lang.String" };
+		_methodParameterTypes33 = new String[] { "java.lang.String" };
 
-		_methodName42 = "getMessageBundles";
+		_methodName38 = "getMessageBundles";
 
-		_methodParameterTypes42 = new String[] {  };
+		_methodParameterTypes38 = new String[] {  };
 
-		_methodName43 = "getMessageSourcesKeyCount";
+		_methodName39 = "getMessageSourcesKeyCount";
 
-		_methodParameterTypes43 = new String[] {  };
+		_methodParameterTypes39 = new String[] {  };
 
-		_methodName44 = "getMessageSourcesKey";
+		_methodName40 = "getMessageSourcesKey";
 
-		_methodParameterTypes44 = new String[] { "int", "int" };
+		_methodParameterTypes40 = new String[] { "int", "int" };
 
-		_methodName45 = "getMessageSources";
+		_methodName41 = "getMessageSources";
 
-		_methodParameterTypes45 = new String[] { "int", "int" };
+		_methodParameterTypes41 = new String[] { "int", "int" };
 
-		_methodName46 = "getMessageSources";
+		_methodName42 = "getMessageSources";
 
-		_methodParameterTypes46 = new String[] {
+		_methodParameterTypes42 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "int", "int"
 			};
 
-		_methodName47 = "getMessageSourcesKey";
+		_methodName43 = "getMessageSourcesKey";
 
-		_methodParameterTypes47 = new String[] {
+		_methodParameterTypes43 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "int", "int"
 			};
 
-		_methodName48 = "getMessageSourcesKeyCount";
+		_methodName44 = "getMessageSourcesKeyCount";
 
-		_methodParameterTypes48 = new String[] {
+		_methodParameterTypes44 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
 
-		_methodName50 = "getMessageSourceWrappers";
+		_methodName46 = "getMessageSourceWrappers";
 
-		_methodParameterTypes50 = new String[] { "int", "int" };
+		_methodParameterTypes46 = new String[] { "int", "int" };
 
-		_methodName53 = "getMSWJson";
+		_methodName49 = "getMSWJson";
 
-		_methodParameterTypes53 = new String[] { "int", "int" };
+		_methodParameterTypes49 = new String[] { "int", "int" };
 
-		_methodName54 = "getMSWJson";
+		_methodName50 = "getMSWJson";
 
-		_methodParameterTypes54 = new String[] {
+		_methodParameterTypes50 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "int", "int"
 			};
 
-		_methodName55 = "getMessageSourceWrappers";
+		_methodName51 = "getMessageSourceWrappers";
 
-		_methodParameterTypes55 = new String[] {
+		_methodParameterTypes51 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "int", "int"
 			};
 
-		_methodName56 = "getMessageSourcesByKey";
+		_methodName52 = "getMessageSourcesByKey";
 
-		_methodParameterTypes56 = new String[] { "java.lang.String" };
+		_methodParameterTypes52 = new String[] { "java.lang.String" };
 
-		_methodName57 = "clearCache";
+		_methodName53 = "clearCache";
 
-		_methodParameterTypes57 = new String[] {  };
+		_methodParameterTypes53 = new String[] {  };
 
-		_methodName59 = "findAll";
+		_methodName54 = "findAll";
 
-		_methodParameterTypes59 = new String[] {  };
+		_methodParameterTypes54 = new String[] {  };
 
-		_methodName60 = "findByBundle";
+		_methodName55 = "findByBundle";
 
-		_methodParameterTypes60 = new String[] { "java.lang.String" };
+		_methodParameterTypes55 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -250,75 +252,77 @@ public class MessageSourceLocalServiceClpInvoker {
 
 		if (_methodName9.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes9, parameterTypes)) {
-			return MessageSourceLocalServiceUtil.fetchMessageSource((com.rcs.service.service.persistence.MessageSourcePK)arguments[0]);
+			return MessageSourceLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+				(com.liferay.portal.kernel.dao.orm.Projection)arguments[1]);
 		}
 
 		if (_methodName10.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-			return MessageSourceLocalServiceUtil.getMessageSource((com.rcs.service.service.persistence.MessageSourcePK)arguments[0]);
+			return MessageSourceLocalServiceUtil.fetchMessageSource((com.rcs.service.service.persistence.MessageSourcePK)arguments[0]);
 		}
 
 		if (_methodName11.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-			return MessageSourceLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return MessageSourceLocalServiceUtil.getMessageSource((com.rcs.service.service.persistence.MessageSourcePK)arguments[0]);
 		}
 
 		if (_methodName12.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes12, parameterTypes)) {
-			return MessageSourceLocalServiceUtil.getMessageSources(((Integer)arguments[0]).intValue(),
-				((Integer)arguments[1]).intValue());
+			return MessageSourceLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName13.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
-			return MessageSourceLocalServiceUtil.getMessageSourcesCount();
-		}
-
-		if (_methodName14.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return MessageSourceLocalServiceUtil.updateMessageSource((com.rcs.service.model.MessageSource)arguments[0]);
-		}
-
-		if (_methodName15.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return MessageSourceLocalServiceUtil.updateMessageSource((com.rcs.service.model.MessageSource)arguments[0],
-				((Boolean)arguments[1]).booleanValue());
-		}
-
-		if (_methodName36.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes36, parameterTypes)) {
-			return MessageSourceLocalServiceUtil.getBeanIdentifier();
-		}
-
-		if (_methodName37.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes37, parameterTypes)) {
-			MessageSourceLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
-		}
-
-		if (_methodName42.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
-			return MessageSourceLocalServiceUtil.getMessageBundles();
-		}
-
-		if (_methodName43.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes43, parameterTypes)) {
-			return MessageSourceLocalServiceUtil.getMessageSourcesKeyCount();
-		}
-
-		if (_methodName44.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
-			return MessageSourceLocalServiceUtil.getMessageSourcesKey(((Integer)arguments[0]).intValue(),
-				((Integer)arguments[1]).intValue());
-		}
-
-		if (_methodName45.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes45, parameterTypes)) {
 			return MessageSourceLocalServiceUtil.getMessageSources(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
-		if (_methodName46.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
+		if (_methodName14.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
+			return MessageSourceLocalServiceUtil.getMessageSourcesCount();
+		}
+
+		if (_methodName15.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
+			return MessageSourceLocalServiceUtil.updateMessageSource((com.rcs.service.model.MessageSource)arguments[0]);
+		}
+
+		if (_methodName32.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes32, parameterTypes)) {
+			return MessageSourceLocalServiceUtil.getBeanIdentifier();
+		}
+
+		if (_methodName33.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes33, parameterTypes)) {
+			MessageSourceLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+
+			return null;
+		}
+
+		if (_methodName38.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes38, parameterTypes)) {
+			return MessageSourceLocalServiceUtil.getMessageBundles();
+		}
+
+		if (_methodName39.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes39, parameterTypes)) {
+			return MessageSourceLocalServiceUtil.getMessageSourcesKeyCount();
+		}
+
+		if (_methodName40.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes40, parameterTypes)) {
+			return MessageSourceLocalServiceUtil.getMessageSourcesKey(((Integer)arguments[0]).intValue(),
+				((Integer)arguments[1]).intValue());
+		}
+
+		if (_methodName41.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes41, parameterTypes)) {
+			return MessageSourceLocalServiceUtil.getMessageSources(((Integer)arguments[0]).intValue(),
+				((Integer)arguments[1]).intValue());
+		}
+
+		if (_methodName42.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
 			return MessageSourceLocalServiceUtil.getMessageSources((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3],
@@ -326,8 +330,8 @@ public class MessageSourceLocalServiceClpInvoker {
 				((Integer)arguments[5]).intValue());
 		}
 
-		if (_methodName47.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
+		if (_methodName43.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes43, parameterTypes)) {
 			return MessageSourceLocalServiceUtil.getMessageSourcesKey((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3],
@@ -335,27 +339,27 @@ public class MessageSourceLocalServiceClpInvoker {
 				((Integer)arguments[5]).intValue());
 		}
 
-		if (_methodName48.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
+		if (_methodName44.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
 			return MessageSourceLocalServiceUtil.getMessageSourcesKeyCount((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3]);
 		}
 
-		if (_methodName50.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
+		if (_methodName46.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
 			return MessageSourceLocalServiceUtil.getMessageSourceWrappers(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
-		if (_methodName53.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
+		if (_methodName49.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
 			return MessageSourceLocalServiceUtil.getMSWJson(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
-		if (_methodName54.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
+		if (_methodName50.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
 			return MessageSourceLocalServiceUtil.getMSWJson((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3],
@@ -363,8 +367,8 @@ public class MessageSourceLocalServiceClpInvoker {
 				((Integer)arguments[5]).intValue());
 		}
 
-		if (_methodName55.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
+		if (_methodName51.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
 			return MessageSourceLocalServiceUtil.getMessageSourceWrappers((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3],
@@ -372,23 +376,25 @@ public class MessageSourceLocalServiceClpInvoker {
 				((Integer)arguments[5]).intValue());
 		}
 
-		if (_methodName56.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
+		if (_methodName52.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
 			return MessageSourceLocalServiceUtil.getMessageSourcesByKey((java.lang.String)arguments[0]);
 		}
 
-		if (_methodName57.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
+		if (_methodName53.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
 			MessageSourceLocalServiceUtil.clearCache();
+
+			return null;
 		}
 
-		if (_methodName59.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+		if (_methodName54.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
 			return MessageSourceLocalServiceUtil.findAll();
 		}
 
-		if (_methodName60.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
+		if (_methodName55.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
 			return MessageSourceLocalServiceUtil.findByBundle((java.lang.String)arguments[0]);
 		}
 
@@ -427,38 +433,38 @@ public class MessageSourceLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName36;
-	private String[] _methodParameterTypes36;
-	private String _methodName37;
-	private String[] _methodParameterTypes37;
+	private String _methodName32;
+	private String[] _methodParameterTypes32;
+	private String _methodName33;
+	private String[] _methodParameterTypes33;
+	private String _methodName38;
+	private String[] _methodParameterTypes38;
+	private String _methodName39;
+	private String[] _methodParameterTypes39;
+	private String _methodName40;
+	private String[] _methodParameterTypes40;
+	private String _methodName41;
+	private String[] _methodParameterTypes41;
 	private String _methodName42;
 	private String[] _methodParameterTypes42;
 	private String _methodName43;
 	private String[] _methodParameterTypes43;
 	private String _methodName44;
 	private String[] _methodParameterTypes44;
-	private String _methodName45;
-	private String[] _methodParameterTypes45;
 	private String _methodName46;
 	private String[] _methodParameterTypes46;
-	private String _methodName47;
-	private String[] _methodParameterTypes47;
-	private String _methodName48;
-	private String[] _methodParameterTypes48;
+	private String _methodName49;
+	private String[] _methodParameterTypes49;
 	private String _methodName50;
 	private String[] _methodParameterTypes50;
+	private String _methodName51;
+	private String[] _methodParameterTypes51;
+	private String _methodName52;
+	private String[] _methodParameterTypes52;
 	private String _methodName53;
 	private String[] _methodParameterTypes53;
 	private String _methodName54;
 	private String[] _methodParameterTypes54;
 	private String _methodName55;
 	private String[] _methodParameterTypes55;
-	private String _methodName56;
-	private String[] _methodParameterTypes56;
-	private String _methodName57;
-	private String[] _methodParameterTypes57;
-	private String _methodName59;
-	private String[] _methodParameterTypes59;
-	private String _methodName60;
-	private String[] _methodParameterTypes60;
 }
